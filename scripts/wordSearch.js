@@ -130,11 +130,24 @@ $(function () {
 
 
     $("#importSet").click(function () {
+    // get the set with the given ID
+    let setID = $("#setID").val();
+    importSet(setID);
+
     let wSBoard = (makeWordSearch(wordList));
     displayCrossword(wSBoard);
-    
-    
     });
+
+    function importSet(setID) {
+        let id = "GRfAXGKv6t"
+        $.get("https://api.quizlet.com/2.0/sets/" + setID + "?client_id=" + id)
+            .done(function (response) {
+                console.log(response);
+            })
+            .fail(function (error) {
+                console.log(error);
+            })
+    }
 
     function displayCrossword(boardObj) {
         let board = boardObj[0].board;
