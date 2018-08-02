@@ -1,5 +1,5 @@
 body {
-   background-color: #FFFFFF;
+   background-color: #dad8d8;
 }
 
 .container {
@@ -30,7 +30,7 @@ body {
 }
 
 .square2 {
-    background-color: #007EA7;
+    background-color: #FFFFFF;
     height: 520px;
     -webkit-box-shadow: 0 8px 6px -6px #999;
     -moz-box-shadow: 0 8px 6px -6px #999;
@@ -41,33 +41,31 @@ img {
 }
 .banner {
     background-color: white;
-    /* position: relative; */
-    z-index:1000;
-    /* height: 200px; */
-    border-radius: 40%;
-    width: 500px;
-    /* margin-top: -440px;
-    margin-left: 400px; */
+    border-radius: 15px;
     margin-top: 150px;
-    margin-right: 10px;
-    
+    margin-right: 40px;
     border: 2px solid #003459;
     font-family: 'Oswald', sans-serif;
+    -webkit-box-shadow: 0 8px 6px -6px #999;
+    -moz-box-shadow: 0 8px 6px -6px #999;
+    box-shadow: 0 8px 8px 3px #999;
+    padding: 10px;
 }
 
 h4{
-    margin-top: 55px;
-    margin-left: 18px;
+    margin-top: 10px;
+    text-align: center;
+    color: #003459;
 }
 
 p {
-    text-align: right;
+    text-align: center;
     padding-right: 150px;
 }
 
 .now {
     /* position: relative; */
-    width: 100%;
+    width: 90%;
     height: 70px;
     /* margin-left: 500px; */
     margin-top: 20px;
