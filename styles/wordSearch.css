@@ -8,14 +8,12 @@
 
 #display-crossword {
     padding-top: 10%;
+    padding-bottom: 5%;
 }
 
 li {
-    display: inline-block;
-    min-width: 10%;
+    /* display: inline-block; */
+    /* min-width: 15%; */
     font-weight: bold;
-}
-
-#clue-list {
-    text-align: center;
+    list-style-type: none;
 }

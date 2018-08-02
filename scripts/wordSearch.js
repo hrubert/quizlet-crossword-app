@@ -131,6 +131,7 @@ $(function () {
     switched = false;
     $("#display-crossword").empty();
     $("#clue-list").empty();
+    $("#heading").empty();
     let url = $("#setID").val();
     importSet(url);
     });
@@ -190,9 +191,21 @@ $(function () {
         let clues = boardObj.clueList;
         for (let clue of clues) {
             let $clue = $("<li>", {
-                "text": clue
+                "text": clue,
+                "class": "col-md-2"
             })
             $("#clue-list").append($clue);
+        }
+
+        $("#heading").append("<p>Name:</p>");
+        $("#heading").append("<p>Date:</p>");
+        $("#heading").append("<p>Class:</p>");
+
+        if (boardObj.unplacedWords.length > 0) {
+            let text = boardObj.unplacedWords;
+            text = text.join(", ")
+            $("#unplacedwords").text(text);
+            $('.modal').modal('show');
         }
     }
 
@@ -201,6 +214,7 @@ $(function () {
         switched = true;        
         $("#display-crossword").empty();
         $("#clue-list").empty();
+        $("#heading").empty();
         let url = $("#setID").val();
         importSet(url);
         });
