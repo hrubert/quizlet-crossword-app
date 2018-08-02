@@ -1,0 +1,21 @@
+.word-row {
+    font-family: monospace;
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 1em;
+    letter-spacing: 1em;
+}
+
+#display-crossword {
+    padding: 10%;
+}
+
+li {
+    display: inline-block;
+    min-width: 10%;
+    font-weight: bold;
+}
+
+#clue-list {
+    text-align: center;
+}
