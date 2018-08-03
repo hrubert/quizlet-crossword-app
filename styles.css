@@ -22,11 +22,12 @@ body {
 }
 
 .square1 {
-    background-color:#BEE6F4;
-    height: 600%;
+    background-image: url(images/classroom.jpg);
+    height: 650%;
     -webkit-box-shadow: 0 8px 6px -6px #999;
     -moz-box-shadow: 0 8px 6px -6px #999;
     box-shadow: 0 8px 8px 3px #999;
+    width: 500px;
 }
 
 .square2 {
@@ -74,4 +75,25 @@ p {
 
 .imageDiv {
     background-size: 100% auto;
+}
+
+.square3 {
+    background-color: #007EA7;
+    height: 520px;
+    -webkit-box-shadow: 0 8px 6px -6px #999;
+    -moz-box-shadow: 0 8px 6px -6px #999;
+    box-shadow: 0 8px 8px 3px #999;
+}
+
+h1 {
+    text-align: center;
+    color: white;
+    font-size: 50px;
+    text-shadow: 2px 2px 4px #000000;
+}
+
+.instructions {
+    color: white;
+    font-size: 30px;
+    text-align: left;
 }
