@@ -12,8 +12,26 @@
 }
 
 li {
-    /* display: inline-block; */
-    /* min-width: 15%; */
     font-weight: bold;
     list-style-type: none;
+}
+
+.black-box {
+    display: block;
+    background-color: black;
+    height: 1.5em;
+    width: 1.5em;
+}
+
+.white-box {
+    display: block;
+    background-color: white;
+    height: 1.5em;
+    width: 1.5em;
+    border: 2px solid black;
+}
+
+.cwordRow {
+    display: inline-flex;
+    margin: auto;
 }
