@@ -1,10 +1,10 @@
 // Create a board object
 $(function () {
+    var num = 1;
 
     function Board(size) {
         this.size = size;
         this.board = [];
-        this.clueList = [];
         this.unplacedWords = [];
 
         // create an empty board to the given specifications
@@ -12,105 +12,127 @@ $(function () {
             for (let i = 0; i < this.size; i++) {
                 let row = [];
                 for (let j = 0; j < this.size; j++) {
-                    row.push(" ");
+                    row.push({"letter": " "});
                 }
                 this.board.push(row);
             }
         }
 
-        // cycle through the wordlist, placing words
+        // master function to place words
         this.placeWords = function (wordArr) {
-            // for each word
-            for (let i = 0; i < wordArr.length; i++) {
-                // decide if the word is going horizontal or vertical
-                if (Math.floor(Math.random() * 2) == 0) { //horizontal
-                    this.placeHorizontal(wordArr[i][0], wordArr[i][1]);
-                } else { //vertical
-                    this.placeVertical(wordArr[i][0], wordArr[i][1]);
-                }
+            // put the first word vertically, in the third column
+            this.placeVertical(wordArr.shift(), Math.floor(Math.random() * 39), 50);
+            // pop words off the front of the array until it is empty
+            while (wordArr.length > 0) {
+                this.findPos(wordArr.shift());
             }
         }
 
-        // finds a random location to see if the word will fit. Try 10 times
-        this.getHorPos = function (word) {
-            for (let i = 0; i < 10; i++) {
-                y = Math.floor(Math.random() * (this.size));
-                x = Math.floor(Math.random() * (this.size - word.length));
-                if (this.canFitHor(word, x, y)) {
-                    return (x, y);
-                }
-            }
-            this.unplacedWords.push(word);
-        }
-
-        // checks to see if the word will fit horizontally in that spot.
-        this.canFitHor = function (word, x, y, ) {
+        // see if there is a match for that letter on the board
+        this.findPos = function(wordandDef) {
+            let word = wordandDef[0];
+            let def = wordandDef[1];
+            // check every letter in the word 
+            loop1:
             for (let i = 0; i < word.length; i++) {
-                if (this.board[y][x + i] != word[i] && this.board[y][x + i] != ' ') {
-                    return false
+                //against every letter in the board
+                for (let y = 0; y < this.board.length; y++) {
+                    for (let x = 0; x < this.board[y].length; x++) {
+                        //if the letter matches, see if it will fit in the opposite orientation
+                        if (word[i] == this.board[y][x].letter) {
+                            let horizontal = this.board[y][x].horizontal;
+                            if (horizontal) {
+                                if (this.canFitVer(word, x, y - i)) {
+                                    this.placeVertical(wordandDef, x, y - i);
+                                    break loop1;
+                                }
+                            } else {
+                                if (this.canFitHor(word, x - i, y)) {
+                                    this.placeHorizontal(wordandDef, x - i, y);
+                                    break loop1;
+                                }
+                            }
+                        }    
+                    }
+                }
+                if (i == word.length - 1) {
+                    this.unplacedWords.push(wordandDef);
                 }
             }
-            return true;
+            
         }
 
-        // places a word horizontally 
-        this.placeHorizontal = function (word, clue) {
-            this.getHorPos(word);
-            if (!this.unplacedWords.includes(word)) {
-                this.clueList.push(clue);
-                for (let i = 0; i < word.length; i++) {
-                    this.board[y][x + i] = word[i];
+        // places a word vertically
+        this.placeVertical = function (word, x, y) {
+            for (let i = 0; i < word[0].length; i++) {
+                if (i == 0) {
+                    this.board[y + i][x] = new Letter(word[0][i], false, word[1], num);
+                    num++;
+                } else {
+                    this.board[y + i][x] = new Letter(word[0][i], false, word[1]);
                 }
             }
-        }
 
-        // finds a random location to see if the word will fit. Try 10 times
-        this.getVerPos = function (word) {
-            for (let i = 0; i < 10; i++) {
-                x = Math.floor(Math.random() * (this.size));
-                y = Math.floor(Math.random() * (this.size - word.length));
-                if (this.canFitVer(word, x, y)) {
-                    return (x, y);
-                }
-            }
-            this.unplacedWords.push(word);
         }
 
         // checks to see if the word will fit vertically in that spot.
         this.canFitVer = function (word, x, y) {
+            console.log(this.board);
             for (let i = 0; i < word.length; i++) {
-                if (this.board[y + i][x] != word[i] && this.board[y + i][x] != ' ') {
-                    return false
+                if ((this.board[y + i][x].letter != word[i] && this.board[y + i][x].letter != ' ')) {
+                    return false;
+                } else if (this.board[y + i][x + 1].letter != ' ' && this.board[y + i][x - 1].letter != ' '){
+                    return false;
                 }
             }
             return true;
         }
 
-        // places a word verically
-        this.placeVertical = function (word, clue) {
-            this.getVerPos(word);
-            if (!this.unplacedWords.includes(word)) {
-                this.clueList.push(clue);
-                for (let i = 0; i < word.length; i++) {
-                    this.board[y + i][x] = word[i];
+        // places a word horizontally
+        this.placeHorizontal = function (word, x, y) {
+            for (let i = 0; i < word[0].length; i++) {
+                if (i == 0) {
+                    this.board[y][x + i] = new Letter(word[0][i], true, word[1], num);
+                    num++;
+                } else {
+                    this.board[y][x + i] = new Letter(word[0][i], true, word[1]);
                 }
             }
         }
 
+        // checks to see if the word will fit horizontally in that spot.
+        this.canFitHor = function (word, x, y) {
+            for (let i = 0; i < word.length; i++) {
+                if ((this.board[y][x + i]) && this.board[y][x + i].letter != word[i] && this.board[y][x + i].letter != ' ') {
+                    return false;
+                } else if (this.board[y + 1][x + i].letter != " " && this.board[y - 1][x + i].letter != " ") {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        this.stripEdges = function () {
+            
+        }
+    }
+
+    function Letter(letter, horizontal, clue, num = false) {
+        this.letter = letter;
+        this.horizontal = horizontal;
+        this.clue = clue;
+        this.num = num;
     }
 
 
     function makeWordSearch(wordArr) {
-        let userSize = $("#size").val();
-        setSize(userSize);
-        let wSBoard = new Board(size);
+        let wSBoard = new Board(100);
         wSBoard.makeEmptyBoard();
         wSBoard.placeWords(wordArr);
-        console.log(wSBoard.board);
+        wS.Board.stripEdges();
         return (wSBoard);
     }
 
-    let size = 40;
     let switched;
 
 
@@ -124,22 +146,15 @@ $(function () {
         importSet(url);
     });
 
-    function setSize(userSize) {
-        if (!userSize) {
-            size = 40;
-        } else if (userSize < 15) {
-            size = 15;
-        } else if (userSize > 40) {
-            size = 40;
-        } else {
-            size = userSize;
-        }
-    }
-
     function importSet(url) {
         let id = "GRfAXGKv6t"
-        let setID = getSetID(url);
-        $.get("https://api.quizlet.com/2.0/sets/" + setID + "?client_id=" + id)
+        // let setID = getSetID(url);
+
+
+        $.get("https://api.quizlet.com/2.0/sets/165539434" + "?client_id=" + id)
+
+
+            // $.get("https://api.quizlet.com/2.0/sets/" + setID + "?client_id=" + id)
             .done(function (response) {
                 extractSetInfo(response);
             })
@@ -172,26 +187,27 @@ $(function () {
             $($row).addClass("cwordRow");
             for (let j = 0; j < board[i].length; j++) {
                 var $col = $("<div>");
-                if (board[i][j] == " ") {
+                if (board[i][j].letter == " ") {
                     $($col).addClass("black-box");
                 } else {
                     $($col).addClass("white-box");
+                    $($col).text(board[i][j].letter);
                 }
                 $($row).append($col);
             }
-        $("#display-crossword").append($row);            
+            $("#display-crossword").append($row);
         };
-  
+
 
         // append clues to the page
-        let clues = boardObj.clueList;
-        for (let clue of clues) {
-            let $clue = $("<li>", {
-                "text": clue,
-                "class": "col-md-2"
-            })
-            $("#clue-list").append($clue);
-        }
+        // let clues = boardObj.clueList;
+        // for (let clue of clues) {
+        //     let $clue = $("<li>", {
+        //         "text": clue,
+        //         "class": "col-md-2"
+        //     })
+        //     $("#clue-list").append($clue);
+        // }
 
         $("#heading").append("<p>Name:</p>");
         $("#heading").append("<p>Date:</p>");
