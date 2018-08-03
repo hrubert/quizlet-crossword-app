@@ -106,6 +106,7 @@ $(function () {
         let wSBoard = new Board(size);
         wSBoard.makeEmptyBoard();
         wSBoard.placeWords(wordArr);
+        console.log(wSBoard.board);
         return (wSBoard);
     }
 

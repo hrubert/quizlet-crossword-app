@@ -7,8 +7,8 @@
 }
 
 #display-crossword {
-<<<<<<< HEAD
-    padding: 10%;
+    padding-top: 10%;
+    padding-bottom: 5%;
 }
 
 li {
@@ -20,18 +20,11 @@ li {
 #clue-list {
     text-align: center;
 }
-=======
-    padding-top: 10%;
-    padding-bottom: 5%;
-}
 
 li {
     font-weight: bold;
     list-style-type: none;
 }
-<<<<<<< HEAD
->>>>>>> 3e0d9b6c02f4aa9e0c542cf6a91f6c8c9231b686
-=======
 
 .black-box {
     display: block;
@@ -52,4 +45,3 @@ li {
     display: inline-flex;
     margin: auto;
 }
->>>>>>> 22c9b7b057556c4ede78566a58d897f15172b2ce
