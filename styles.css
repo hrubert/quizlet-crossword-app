@@ -22,42 +22,60 @@ body {
 }
 
 .square1 {
-    background-color: blue;
     background-image: url(images/classroom.jpg);
-    height: 650%;
+    background-repeat: no-repeat;
     -webkit-box-shadow: 0 8px 6px -6px #999;
     -moz-box-shadow: 0 8px 6px -6px #999;
     box-shadow: 0 8px 8px 3px #999;
-    width: 500px;
+    height: 100vh;
+    margin-top: 5%;
+    background-size: cover;
+    z-index: 99;
+    /* filter: blur(2px); */
+}
+
+.flbx {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.banner {
+    background-color: white;
+    border-radius: 15px;
+    border: 2px solid #003459;
+    font-family: 'Oswald', sans-serif;
+    box-shadow: 0 4px 4px 2px #6e6e6e;
+    height: 30%;
+    width: 50%;
+}
+
+.phrase {
+    color: #003459; 
+    text-align: center; 
+    font-size: 30px;
+    margin-top: 50px;
 }
 
 .square2 {
     background-color: #FFFFFF;
-    height: 520px;
+    /* height: 520px; */
     -webkit-box-shadow: 0 8px 6px -6px #999;
     -moz-box-shadow: 0 8px 6px -6px #999;
     box-shadow: 0 8px 8px 3px #999;
-}
-img {
-    margin-top: 18%;
-}
-.banner {
-    background-color: white;
-    border-radius: 15px;
-    margin-top: 150px;
-    margin-right: 40px;
-    border: 2px solid #003459;
-    font-family: 'Oswald', sans-serif;
-    -webkit-box-shadow: 0 8px 6px -6px #999;
-    -moz-box-shadow: 0 8px 6px -6px #999;
-    box-shadow: 0 8px 8px 3px #999;
-    padding: 10px;
+    padding: 30px;
 }
 
-h4{
-    margin-top: 10px;
+.whatcanyou {
     text-align: center;
+    font-family: 'Francois One', sans-serif;
     color: #003459;
+    font-size: 40px;
+    text-shadow: 2px 2px 4px #000000;
+}
+
+.icon {
+    margin-left: 70px;
 }
 
 p {
@@ -80,16 +98,16 @@ p {
 
 .square3 {
     background-color: #007EA7;
-    height: 520px;
     -webkit-box-shadow: 0 8px 6px -6px #999;
     -moz-box-shadow: 0 8px 6px -6px #999;
     box-shadow: 0 8px 8px 3px #999;
 }
 
-h1 {
+.howowkrs {
+    font-family: 'Francois One', sans-serif;
     text-align: center;
     color: white;
-    font-size: 50px;
+    font-size: 40px;
     text-shadow: 2px 2px 4px #000000;
 }
 
@@ -97,4 +115,42 @@ h1 {
     color: white;
     font-size: 30px;
     text-align: left;
+}
+
+@media only screen and (max-width: 600px){
+    .square1 {
+        background-image: url(images/classroom.jpg);
+        background-repeat: no-repeat;
+        -webkit-box-shadow: 0 8px 6px -6px #999;
+        -moz-box-shadow: 0 8px 6px -6px #999;
+        box-shadow: 0 8px 8px 3px #999;
+        height: 100vh;
+        margin-top: 5%;
+        background-size: cover;
+        z-index: 99;
+        background-position: center;
+        /* filter: blur(2px); */
+    }
+
+    .banner {
+        background-color: white;
+        border-radius: 15px;
+        border: 2px solid #003459;
+        font-family: 'Oswald', sans-serif;
+        box-shadow: 0 4px 4px 2px #6e6e6e;
+        height: 28%;
+        width: 70%;
+    }
+
+    .phrase {
+        color: #003459; 
+        text-align: center; 
+        font-size: 28px;
+        margin-top: 25px;
+        padding: 10px;
+    }
+
+    .icon {
+        margin-left: 50px;
+    }
 }
