@@ -113,44 +113,72 @@ $(function () {
 
 
     function makeWordSearch(wordArr) {
-        let wSBoard = new Board(15);
+        let userSize = $("#size").val();
+        setSize(userSize);            
+        let wSBoard = new Board(size);
         wSBoard.makeEmptyBoard();
-        wSBoard.placeWords(wordList);
+        wSBoard.placeWords(wordArr);
         wSBoard.fillBoard();
-        return ([wSBoard]);
+        return (wSBoard);
     }
 
-    var wordList = [
-        ["cat", 'kitten'],
-        ['dog', 'puppy'],
-        ['horse', 'foal'],
-        ['pig', 'piglet'],
-        ['duck', 'gosling']
-    ];
+    let size = 40;
+    let switched;
 
 
     $("#importSet").click(function () {
     // get the set with the given ID
-    let setID = $("#setID").val();
-    importSet(setID);
-
-    let wSBoard = (makeWordSearch(wordList));
-    displayCrossword(wSBoard);
+    switched = false;
+    $("#display-crossword").empty();
+    $("#clue-list").empty();
+    $("#heading").empty();
+    let url = $("#setID").val();
+    importSet(url);
     });
 
-    function importSet(setID) {
+    function setSize(userSize){
+        if (!userSize) {
+            size = 40;
+        }else if (userSize < 15) {
+            size = 15;
+        } else if (userSize > 40) {
+            size = 40;
+        } else {
+            size = userSize;
+        }
+    }
+
+    function importSet(url) {
         let id = "GRfAXGKv6t"
+        let setID = getSetID(url);
         $.get("https://api.quizlet.com/2.0/sets/" + setID + "?client_id=" + id)
             .done(function (response) {
-                console.log(response);
+                extractSetInfo(response);
             })
             .fail(function (error) {
                 console.log(error);
             })
     }
 
+    function getSetID(url) {
+        return /\d{6,}/g.exec(url)[0];
+    }
+
+    function extractSetInfo(obj){
+        $("#title").text(obj.title);
+        let terms = obj.terms;
+        if (!switched) {
+            var wordList = terms.map(term => [term.term.toLowerCase().split(" ").join(''), term.definition]);
+        } else {
+            var wordList = terms.map(term => [term.definition.toLowerCase().split(" ").join(''), term.term]);            
+        }
+        
+        let wSBoard = (makeWordSearch(wordList));
+        displayCrossword(wSBoard);
+    }
+
     function displayCrossword(boardObj) {
-        let board = boardObj[0].board;
+        let board = boardObj.board;
         for (let row of board) {
             let $row = $("<p>", {
                 "text": row.join(""),
@@ -160,12 +188,34 @@ $(function () {
         }
     
         // append clues to the page
-        let clues = boardObj[0].clueList;
+        let clues = boardObj.clueList;
         for (let clue of clues) {
             let $clue = $("<li>", {
-                "text": clue
+                "text": clue,
+                "class": "col-md-2"
             })
             $("#clue-list").append($clue);
         }
+
+        $("#heading").append("<p>Name:</p>");
+        $("#heading").append("<p>Date:</p>");
+        $("#heading").append("<p>Class:</p>");
+
+        if (boardObj.unplacedWords.length > 0) {
+            let text = boardObj.unplacedWords;
+            text = text.join(", ")
+            $("#unplacedwords").text(text);
+            $('.modal').modal('show');
+        }
     }
+
+    $("#switch").click(function () {
+        // get the set with the given ID
+        switched = true;        
+        $("#display-crossword").empty();
+        $("#clue-list").empty();
+        $("#heading").empty();
+        let url = $("#setID").val();
+        importSet(url);
+        });
 });

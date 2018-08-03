@@ -25,6 +25,46 @@
         <small id="helpId" class="form-text text-muted">Help text</small>
         <button type="button" class="btn btn-primary" id="importSet">Import quizlet set</button>
     </div>
+<!-- modal pop-up if words are unplaced -->
+<div class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Unplaced words</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Unable to place the following word(s): <span id="unplacedwords"></span>. Try increasing the puzzle size unless at max.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Main body container -->
+<div class="container">
+    <div id="heading">              
+    </div>
+    <h1 class="text-center" id="title">Make a Word Search</h1>
+    <div id="display-crossword">
+    </div>
+    <div class="container">
+        <ul id="clue-list" class="row"></ul>
+    </div>
+    <div class="form-inline">
+        <div class="row"></div>
+        <input type="url" class="form-control col-md-7" name="setID" id="setID" aria-describedby="helpId" placeholder="url of quizlet set"
+            required>
+        <button type="button" class="btn btn-primary col-md-2" id="importSet">Import quizlet set</button>
+        <button type="button" class="btn btn-secondary col-md-3" id="switch">Switch terms and definitions</button>
+    </div>
+    <div class="row">
+        <label for="Size" class="col-2">Size of puzzle: </label>
+        <input type="number" class="col-1" name="size" id="size" min="15" max="40" placeholder="15-40">
+    </div>
+</div>
 
 </div>
 

@@ -1,12 +1,19 @@
 .word-row {
     font-family: monospace;
+<<<<<<< HEAD
     font-size: 2rem;
     font-weight: 500;
     line-height: 1em;
+=======
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: .3em;
+>>>>>>> 3e0d9b6c02f4aa9e0c542cf6a91f6c8c9231b686
     letter-spacing: 1em;
 }
 
 #display-crossword {
+<<<<<<< HEAD
     padding: 10%;
 }
 
@@ -19,3 +26,15 @@ li {
 #clue-list {
     text-align: center;
 }
+=======
+    padding-top: 10%;
+    padding-bottom: 5%;
+}
+
+li {
+    /* display: inline-block; */
+    /* min-width: 15%; */
+    font-weight: bold;
+    list-style-type: none;
+}
+>>>>>>> 3e0d9b6c02f4aa9e0c542cf6a91f6c8c9231b686
