@@ -21,11 +21,19 @@ $(function () {
         // master function to place words
         this.placeWords = function (wordArr) {
             // put the first word vertically, in the third column
-            this.placeVertical(wordArr.shift(), Math.floor(Math.random() * 39), 50);
+            this.placeVertical(wordArr.shift(), 50, 50);
             // pop words off the front of the array until it is empty
             while (wordArr.length > 0) {
                 this.findPos(wordArr.shift());
             }
+            
+
+            // implement a loop to place remaining words
+            // while (this.unplacedWords.length > 1) {
+            //     this.findPos(wordArr.shift());                
+            // }
+            this.stripEdges(this.board);
+
         }
 
         // see if there is a match for that letter on the board
@@ -113,6 +121,47 @@ $(function () {
         }
 
         this.stripEdges = function () {
+            //strip top
+            loop1:
+            for (let y = 0; y < this.board.length; y++) {
+                for (let x = 0; x < this.board[y].length; x++) {
+                    if (this.board[y][x].letter != " ") {
+                        this.board.splice(0, y);
+                        break loop1;
+                    }
+                }
+            }
+            //strip bottom
+            loop1:
+            for (let y = this.board.length - 1; y > 0; y--) {
+                for (let x = 0; x < this.board[y].length; x++) {
+                    if (this.board[y][x].letter != " ") {
+                        this.board.splice(y + 1, );
+                        break loop1;
+                    }
+                }
+            }
+            //strip left and right
+            let leftMargin = this.board.length;
+            let rightMargin = 0;
+            for (let y = 0; y < this.board.length; y ++) {
+                for (let x = 0; x < this.board[y].length; x++) {
+                    if (this.board[y][x].letter != " ") {
+                        if (x < leftMargin) {
+                            leftMargin = x;
+                        } else if (x > rightMargin) {
+                            rightMargin = x;
+                        }
+                        
+                    }
+                }
+            }
+
+            for (let y = 0; y < this.board.length; y ++) {
+                this.board[y].splice(rightMargin + 1, this.board[y].length);
+                this.board[y].splice(0, leftMargin);
+            }
+
             
         }
     }
@@ -129,8 +178,7 @@ $(function () {
         let wSBoard = new Board(100);
         wSBoard.makeEmptyBoard();
         wSBoard.placeWords(wordArr);
-        wS.Board.stripEdges();
-        return (wSBoard);
+        return wSBoard
     }
 
     let switched;
@@ -175,7 +223,6 @@ $(function () {
         } else {
             var wordList = terms.map(term => [term.definition.toLowerCase().split(" ").join(''), term.term]);
         }
-
         let wSBoard = (makeWordSearch(wordList));
         displayCrossword(wSBoard);
     }
