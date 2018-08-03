@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>quiz-word | Crossword</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="styles/wordSearch.css">
+</head>
+<!-- modal pop-up if words are unplaced -->
+<div class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Unplaced words</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Unable to place the following word(s): <span id="unplacedwords"></span>. Try increasing the puzzle size unless at max.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Main body container -->
+<div class="container">
+    <div id="heading">              
+    </div>
+    <h1 class="text-center" id="title">Make a Crossword</h1>
+    <div id="display-crossword" class="row align-items-center">
+    </div>
+    <div class="container">
+        <ul id="clue-list" class="row"></ul>
+    </div>
+    <div class="form-inline">
+        <div class="row"></div>
+        <input type="url" class="form-control col-md-7" name="setID" id="setID" aria-describedby="helpId" placeholder="url of quizlet set"
+            required>
+        <button type="button" class="btn btn-primary col-md-2" id="importSet">Import quizlet set</button>
+        <button type="button" class="btn btn-secondary col-md-3" id="switch">Switch terms and definitions</button>
+    </div>
+</div>
+    
+</div>
+
+<body>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em"
+        crossorigin="anonymous"></script>
+    <script src="scripts/crossWord.js"></script>
+</body>
+
+</html>
