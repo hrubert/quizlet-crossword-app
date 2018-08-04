@@ -59,7 +59,7 @@ $(function () {
             if (!this.unplacedWords.includes(word)) {
                 this.clueList.push(clue);
                 for (let i = 0; i < word.length; i++) {
-                    this.board[y][x + i] = word[i];
+                    this.board[y][x + i] = word[i].toUpperCase();
                 }
             }
         }
@@ -92,7 +92,7 @@ $(function () {
             if (!this.unplacedWords.includes(word)) {
                 this.clueList.push(clue);
                 for (let i = 0; i < word.length; i++) {
-                    this.board[y + i][x] = word[i];
+                    this.board[y + i][x] = word[i].toUpperCase();
                 }
             }
         }
@@ -104,7 +104,7 @@ $(function () {
             for (let i = 0; i < this.board.length; i++) {
                 for (let j = 0; j < this.board[i].length; j++) {
                     if (this.board[i][j] == ' ') {
-                        this.board[i][j] = alphabet[Math.floor(Math.random() * 26)];
+                        this.board[i][j] = alphabet[Math.floor(Math.random() * 26)].toUpperCase();
                     }
                 }
             }
