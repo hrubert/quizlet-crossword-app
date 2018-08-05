@@ -22,7 +22,7 @@ body {
 }
 
 .square1 {
-    background-image: url(images/classroom2.jpg);
+    background-image: url(images/classroom3.jpg);
     background-repeat: no-repeat;
     -webkit-box-shadow: 0 8px 6px -6px #999;
     -moz-box-shadow: 0 8px 6px -6px #999;
@@ -51,10 +51,16 @@ body {
 }
 
 .phrase {
-    color: #003459; 
+    color: #FFFFFF; 
     text-align: center; 
-    font-size: 30px;
+    font-size: 40px;
     margin-top: 35px;
+    font-weight: bolder;
+    /* font-family: 'Anton', sans-serif; */
+    font-family: 'Oswald', sans-serif;
+    text-shadow: 2px 2px #003459;
+    /* background-color: #003459; */
+    padding: 10px;
 }
 
 .square2 {
@@ -81,6 +87,7 @@ body {
 .service {
     text-align: center;
     padding-right: 150px;
+    margin-left: -45px;
 }
 
 .now {
@@ -122,7 +129,7 @@ body {
 .instruction1{
     font-size: 20px;
     color: white;
-    margin-left: 20%;
+    margin-left: 22%;
     text-align: center;
 }
 
@@ -152,7 +159,7 @@ footer {
     -webkit-box-shadow: 0 8px 6px -6px #999;
     -moz-box-shadow: 0 8px 6px -6px #999;
     box-shadow: 0 8px 8px 3px #999;
-    padding: 0px;
+    padding: 10px;
 }
 
 @media only screen and (max-width: 600px){
@@ -181,7 +188,7 @@ footer {
     }
 
     .phrase {
-        color: #003459; 
+        color: white; 
         text-align: center; 
         font-size: 25px;
         margin-top: -10px;
@@ -211,5 +218,9 @@ footer {
         color: white;
         margin-left: 0%;
         text-align: center;
+    }
+
+    .how {
+        width: 25%;
     }
 }
