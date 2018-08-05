@@ -29,12 +29,6 @@ $(function () {
             while (wordArr.length > 0) {
                 this.findPos(wordArr.shift());
             }
-
-
-            // implement a loop to place remaining words
-            // while (this.unplacedWords.length > 1) {
-            //     this.findPos(wordArr.shift());                
-            // }
             this.stripEdges(this.board);
 
         }
@@ -77,8 +71,12 @@ $(function () {
         this.placeVertical = function (word, x, y) {
             for (let i = 0; i < word[0].length; i++) {
                 if (i == 0) {
-                    this.board[y + i][x] = new Letter(word[0][i], false, word[1], num);
-                    num++;
+                    if (this.board[y][x].num) {
+                        this.board[y][x] = new Letter(word[0][i], true, word[1], this.board[y][x].num);
+                    } else {
+                        this.board[y][x] = new Letter(word[0][i], false, word[1], num);
+                        num++;
+                    }
                 } else {
                     this.board[y + i][x] = new Letter(word[0][i], false, word[1]);
                 }
@@ -88,7 +86,6 @@ $(function () {
 
         // checks to see if the word will fit vertically in that spot.
         this.canFitVer = function (word, x, y, index) {
-            console.log(this.board);
             for (let i = 0; i < word.length; i++) {
                 if (this.board[y - 1][x].letter != " " || this.board[y + word.length][x].letter != " ") {
                     return false;
@@ -105,8 +102,12 @@ $(function () {
         this.placeHorizontal = function (word, x, y) {
             for (let i = 0; i < word[0].length; i++) {
                 if (i == 0) {
-                    this.board[y][x + i] = new Letter(word[0][i], true, word[1], num);
-                    num++;
+                    if (this.board[y][x].num) {
+                        this.board[y][x] = new Letter(word[0][i], true, word[1], this.board[y][x].num);
+                    } else {
+                        this.board[y][x + i] = new Letter(word[0][i], true, word[1], num);
+                        num++;
+                    }
                 } else {
                     this.board[y][x + i] = new Letter(word[0][i], true, word[1]);
                 }
@@ -157,8 +158,7 @@ $(function () {
             }
 
             let leftMargin = 0;
-            loop1:
-            for (let y = 0; y < this.board.length; y++) {
+            loop1: for (let y = 0; y < this.board.length; y++) {
                 for (let x = 50; x >= 0; x--) {
                     let letterPresent = false;
                     if (this.board[y][x].letter != " ") {
@@ -200,6 +200,7 @@ $(function () {
 
     $("#importSet").click(function () {
         // get the set with the given ID
+        num = 1;
         switched = false;
         $("#display-crossword").empty();
         $("#clue-list").empty();
@@ -252,7 +253,12 @@ $(function () {
                     $($col).addClass("black-box");
                 } else {
                     $($col).addClass("white-box");
-                    $($col).text(board[i][j].letter);
+                    if (board[i][j].num) {
+                        let $inner = $("<span>", {
+                            "text": board[i][j].num
+                        });
+                        $($col).append($inner);
+                    }
                 }
                 $($row).append($col);
             }
@@ -261,6 +267,16 @@ $(function () {
 
 
         // append clues to the page
+        $("#across").prepend("<h3>Across</h3>")
+        $("#down").prepend("<h3>Down</h3>")
+        for (let i = 0; i < board.length; i++) {
+            for (let j = 0; j < board[i].length; j++) {
+                //across clues
+                if (board[i][j].num) {
+                    $("#clue-list-across").append("<li>" + board[i][j].num + "</li>");
+                }
+            }
+        }
         // let clues = boardObj.clueList;
         // for (let clue of clues) {
         //     let $clue = $("<li>", {
@@ -284,6 +300,7 @@ $(function () {
 
     $("#switch").click(function () {
         // get the set with the given ID
+        num = 1;
         switched = true;
         $("#display-crossword").empty();
         $("#clue-list").empty();
