@@ -162,6 +162,17 @@ footer {
     padding: 10px;
 }
 
+footer a {
+    color: rgb(255, 255, 255);
+    font-size: 35px;
+    padding: 10px;
+    transition: all .5s ease;
+}
+
+footer a:hover {
+    color: white;
+}
+
 @media only screen and (max-width: 600px){
     .square1 {
         background-image: url(images/classroom.jpg);
