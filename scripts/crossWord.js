@@ -265,6 +265,7 @@ $(function () {
                     $($col).addClass("black-box");
                 } else {
                     $($col).addClass("white-box");
+                    $($col).attr("letter", board[i][j].letter);
                     if (board[i][j].num) {
                         let $inner = $("<span>", {
                             "text": board[i][j].num
@@ -312,4 +313,12 @@ $(function () {
         let url = $("#setID").val();
         importSet(url);
     });
+
+    $("#answers").click(function () {
+        let $letterSquares = $(".white-box");
+        $letterSquares.each(function(i) {
+            $(this).append("<p>" + $(this).attr("letter") + "</p>");
+            $("span").hide()
+        });
+    })
 });
