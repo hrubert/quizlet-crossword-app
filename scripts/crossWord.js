@@ -168,16 +168,11 @@ $(function () {
                 }
             }
 
-            let leftMargin = 0;
-            loop1: for (let y = 0; y < this.board.length; y++) {
-                for (let x = 50; x >= 0; x--) {
-                    let letterPresent = false;
-                    if (this.board[y][x].letter != " ") {
-                        letterPresent = true;
-                    }
-                    if (letterPresent == false && x > leftMargin) {
+            let leftMargin = 50;
+            for (let y = 0; y < this.board.length; y++) {
+                for (let x = 50; x > 0; x--) {
+                    if (this.board[y][x].letter != " " && x < leftMargin) {
                         leftMargin = x;
-                        break loop1;
                     }
                 }
             }
@@ -200,7 +195,7 @@ $(function () {
 
 
     function makeWordSearch(wordArr) {
-        let wSBoard = new Board(100);
+        let wSBoard = new Board(120);
         wSBoard.makeEmptyBoard();
         wSBoard.placeWords(wordArr);
         return wSBoard
@@ -223,13 +218,8 @@ $(function () {
 
     function importSet(url) {
         let id = "GRfAXGKv6t"
-        // let setID = getSetID(url);
-
-
-        $.get("https://api.quizlet.com/2.0/sets/165539434" + "?client_id=" + id)
-
-
-            // $.get("https://api.quizlet.com/2.0/sets/" + setID + "?client_id=" + id)
+        let setID = getSetID(url);
+        $.get("https://api.quizlet.com/2.0/sets/" + setID + "?client_id=" + id)
             .done(function (response) {
                 extractSetInfo(response);
             })
@@ -246,9 +236,9 @@ $(function () {
         $("#title").text(obj.title);
         let terms = obj.terms;
         if (!switched) {
-            var wordList = terms.map(term => [term.term.toLowerCase().split(" ").join(''), term.definition]);
+            var wordList = terms.map(term => [term.term.toLowerCase().split(" ").join('').replace(/[^0-9a-z]/gi, ''), term.definition]);
         } else {
-            var wordList = terms.map(term => [term.definition.toLowerCase().split(" ").join(''), term.term]);
+            var wordList = terms.map(term => [term.definition.toLowerCase().split(" ").join('').replace(/[^0-9a-z]/gi, ''), term.term]);
         }
         let wSBoard = (makeWordSearch(wordList.slice(0, 29)));
         displayCrossword(wSBoard);
@@ -293,13 +283,6 @@ $(function () {
         $("#heading").append("<p>Name:</p>");
         $("#heading").append("<p>Date:</p>");
         $("#heading").append("<p>Class:</p>");
-
-        if (boardObj.unplacedWords.length > 0) {
-            let text = boardObj.unplacedWords;
-            text = text.join(", ")
-            $("#unplacedwords").text(text);
-            $('.modal').modal('show');
-        }
     }
 
     $("#switch").click(function () {
@@ -315,9 +298,10 @@ $(function () {
     });
 
     $("#answers").click(function () {
+        $(".white-box").empty();
         let $letterSquares = $(".white-box");
         $letterSquares.each(function(i) {
-            $(this).append("<p>" + $(this).attr("letter") + "</p>");
+            $(this).append("<p class='text-center'>" + $(this).attr("letter") + "</p>");
             $("span").hide()
         });
     })

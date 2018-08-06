@@ -3,7 +3,8 @@
     font-size: 1rem;
     font-weight: 500;
     line-height: .3em;
-    letter-spacing: 1em;
+    letter-spacing: .5em;
+    margin-top: 1em;
 }
 
 #display-crossword {
@@ -46,8 +47,16 @@ li {
     margin: auto;
 }
 
-span {
+.white-box span {
     font-size: 8px;
     position: relative;
     top: -10px;
+}
+
+.letters {
+    display: inline;
+}
+
+.orange {
+    background-color: orange;
 }

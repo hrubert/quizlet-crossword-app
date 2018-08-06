@@ -22,25 +22,28 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
-            <a class="navbar-brand" href="index.html"><img src="images/quizword.png" width="100px"></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
+        <a class="navbar-brand" href="index.html">
+            <img src="images/quizword.png" width="100px">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
                 <li class="nav-item">
                     <a style="color:white" class="nav-link" href="crossword.html">Crossword</a>
                 </li>
                 <li class="nav-item">
                     <a style="color:white" class="nav-link" href="wordSearch.html">Word Search</a>
                 </li>
-                </ul>
-                <form class="form-inline my-2 my-lg-0 ml-auto">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search a Topic" aria-label="Search">
-                    <button class="btn btn-outline my-2 my-sm-0" type="submit">Search</button>
-                </form>
-            </div>
-        </nav>
+            </ul>
+            <form class="form-inline my-2 my-lg-0 ml-auto">
+                    <input id="searchField" class="form-control mr-sm-2" type="search" placeholder="Search on Quizlet" aria-label="Search">
+                    <button id="searchQ" class="btn btn-outline my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
 
     <!-- modal pop-up if words are unplaced -->
     <div class="modal" tabindex="-1" role="dialog">
@@ -63,29 +66,29 @@
     <div class="container">
         <div class="row">
             <div class="col-12 puzzle1">
-        <div id="heading">
-        </div>
-        <h1 class="text-center" id="title">Make a Crossword</h1>
-        <div id="display-crossword" class="row align-items-center">
-        </div>
-        <div class="container">
-            <div id="across">
-                <ul id="clue-list-across" class="row"></ul>
+                <div id="heading">
+                </div>
+                <h1 class="text-center" id="title">Make a Crossword</h1>
+                <div id="display-crossword" class="row align-items-center">
+                </div>
+                <div class="container">
+                    <div id="across">
+                        <ul id="clue-list-across" class="row"></ul>
+                    </div>
+                    <div id="down">
+                        <ul class="clue-list-down" class="row"></ul>
+                    </div>
+                </div>
+                <div class="form-inline">
+                    <div class="row"></div>
+                    <input type="url" class="form-control col-md-7 searchurl" name="setID" id="setID" aria-describedby="helpId" placeholder="url of quizlet set"
+                        required>
+                    <button type="button" class="btn btn-primary col-md-2" id="importSet">Import quizlet set</button>
+                    <button type="button" class="btn btn-secondary col-md-3" id="switch">Switch terms and definitions</button>
+                    <button type="button" class="btn btn-secondary col-md-2" id="answers">Get answer key</button>
+                </div>
             </div>
-            <div id="down">
-                <ul class="clue-list-down" class="row"></ul>
-            </div>
         </div>
-        <div class="form-inline">
-            <div class="row"></div>
-            <input type="url" class="form-control col-md-7 searchurl" name="setID" id="setID" aria-describedby="helpId" placeholder="url of quizlet set"
-                required>
-            <button type="button" class="btn btn-primary col-md-2" id="importSet">Import quizlet set</button>
-            <button type="button" class="btn btn-secondary col-md-3" id="switch">Switch terms and definitions</button>
-            <button type="button" class="btn btn-secondary col-md-2" id="answers">Get answer key</button>            
-        </div>
-    </div>
-    </div>
     </div>
     </div>
 
@@ -94,10 +97,14 @@
         <!-- Social buttons -->
         <ul class="col-12 list-unstyled list-inline text-center">
             <li class="list-inline-item">
-                <a href="https://github.com/melycm" target="_blank"><i class="fa fa-github github"></i></a>
+                <a href="https://github.com/melycm" target="_blank">
+                    <i class="fa fa-github github"></i>
+                </a>
             </li>
             <li class="list-inline-item">
-                <a href="https://github.com/hrubert" target="_blank"><i class="fa fa-github github"></i></a>
+                <a href="https://github.com/hrubert" target="_blank">
+                    <i class="fa fa-github github"></i>
+                </a>
             </li>
         </ul>
         <!-- Social buttons -->
@@ -106,7 +113,7 @@
         <div class="col-12 footer-copyright text-center pb-3">© 2018 Copyright: Tracy Herbert and Melissa Cantu
         </div>
         <!-- Copyright -->
-    
+
     </footer>
 
     <!-- Optional JavaScript -->
@@ -118,6 +125,14 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em"
         crossorigin="anonymous"></script>
     <script src="scripts/crossWord.js"></script>
+    <script>
+        $("#searchQ").click(function () {
+            let searchTerm = $("#searchField").val();
+            window.open("https://quizlet.com/subject/" + searchTerm.split(" ").join("-"),
+                "Find a topic on Quizlet.com")
+
+        });
+    </script>
 </body>
 
 </html>
