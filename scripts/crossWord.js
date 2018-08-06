@@ -1,4 +1,5 @@
-// Create a board object
+// Create a board git pull
+
 $(function () {
     var num = 1;
 
@@ -12,7 +13,9 @@ $(function () {
             for (let i = 0; i < this.size; i++) {
                 let row = [];
                 for (let j = 0; j < this.size; j++) {
-                    row.push({"letter": " "});
+                    row.push({
+                        "letter": " "
+                    });
                 }
                 this.board.push(row);
             }
@@ -26,56 +29,54 @@ $(function () {
             while (wordArr.length > 0) {
                 this.findPos(wordArr.shift());
             }
-            
-
-            // implement a loop to place remaining words
-            // while (this.unplacedWords.length > 1) {
-            //     this.findPos(wordArr.shift());                
-            // }
             this.stripEdges(this.board);
 
         }
 
         // see if there is a match for that letter on the board
-        this.findPos = function(wordandDef) {
+        this.findPos = function (wordandDef) {
             let word = wordandDef[0];
             let def = wordandDef[1];
             // check every letter in the word 
             loop1:
-            for (let i = 0; i < word.length; i++) {
-                //against every letter in the board
-                for (let y = 0; y < this.board.length; y++) {
-                    for (let x = 0; x < this.board[y].length; x++) {
-                        //if the letter matches, see if it will fit in the opposite orientation
-                        if (word[i] == this.board[y][x].letter) {
-                            let horizontal = this.board[y][x].horizontal;
-                            if (horizontal) {
-                                if (this.canFitVer(word, x, y - i)) {
-                                    this.placeVertical(wordandDef, x, y - i);
-                                    break loop1;
-                                }
-                            } else {
-                                if (this.canFitHor(word, x - i, y)) {
-                                    this.placeHorizontal(wordandDef, x - i, y);
-                                    break loop1;
+                for (let i = 0; i < word.length; i++) {
+                    //against every letter in the board
+                    for (let y = 0; y < this.board.length; y++) {
+                        for (let x = 0; x < this.board[y].length; x++) {
+                            //if the letter matches, see if it will fit in the opposite orientation
+                            if (word[i] == this.board[y][x].letter) {
+                                let horizontal = this.board[y][x].horizontal;
+                                if (horizontal) {
+                                    if (this.canFitVer(word, x, y - i, i)) {
+                                        this.placeVertical(wordandDef, x, y - i);
+                                        break loop1;
+                                    }
+                                } else {
+                                    if (this.canFitHor(word, x - i, y, i)) {
+                                        this.placeHorizontal(wordandDef, x - i, y);
+                                        break loop1;
+                                    }
                                 }
                             }
-                        }    
+                        }
+                    }
+                    if (i == word.length - 1) {
+                        this.unplacedWords.push(wordandDef);
                     }
                 }
-                if (i == word.length - 1) {
-                    this.unplacedWords.push(wordandDef);
-                }
-            }
-            
+
         }
 
         // places a word vertically
         this.placeVertical = function (word, x, y) {
             for (let i = 0; i < word[0].length; i++) {
                 if (i == 0) {
-                    this.board[y + i][x] = new Letter(word[0][i], false, word[1], num);
-                    num++;
+                    if (this.board[y][x].num) {
+                        this.board[y][x] = new Letter(word[0][i], true, word[1], this.board[y][x].num);
+                    } else {
+                        this.board[y][x] = new Letter(word[0][i], false, word[1], num);
+                        num++;
+                    }
                 } else {
                     this.board[y + i][x] = new Letter(word[0][i], false, word[1]);
                 }
@@ -84,12 +85,13 @@ $(function () {
         }
 
         // checks to see if the word will fit vertically in that spot.
-        this.canFitVer = function (word, x, y) {
-            console.log(this.board);
+        this.canFitVer = function (word, x, y, index) {
             for (let i = 0; i < word.length; i++) {
-                if ((this.board[y + i][x].letter != word[i] && this.board[y + i][x].letter != ' ')) {
+                if (this.board[y - 1][x].letter != " " || this.board[y + word.length][x].letter != " ") {
                     return false;
-                } else if (this.board[y + i][x + 1].letter != ' ' && this.board[y + i][x - 1].letter != ' '){
+                } else if ((this.board[y + i][x].letter != word[i] && this.board[y + i][x].letter != ' ')) {
+                    return false;
+                } else if (i != index && (this.board[y + i][x + 1].letter != ' ' || this.board[y + i][x - 1].letter != ' ')) {
                     return false;
                 }
             }
@@ -100,8 +102,12 @@ $(function () {
         this.placeHorizontal = function (word, x, y) {
             for (let i = 0; i < word[0].length; i++) {
                 if (i == 0) {
-                    this.board[y][x + i] = new Letter(word[0][i], true, word[1], num);
-                    num++;
+                    if (this.board[y][x].num) {
+                        this.board[y][x] = new Letter(word[0][i], true, word[1], this.board[y][x].num);
+                    } else {
+                        this.board[y][x + i] = new Letter(word[0][i], true, word[1], num);
+                        num++;
+                    }
                 } else {
                     this.board[y][x + i] = new Letter(word[0][i], true, word[1]);
                 }
@@ -109,11 +115,13 @@ $(function () {
         }
 
         // checks to see if the word will fit horizontally in that spot.
-        this.canFitHor = function (word, x, y) {
+        this.canFitHor = function (word, x, y, index) {
             for (let i = 0; i < word.length; i++) {
-                if ((this.board[y][x + i]) && this.board[y][x + i].letter != word[i] && this.board[y][x + i].letter != ' ') {
+                if (this.board[y][x - 1].letter != " " || this.board[y][x + word.length].letter != " ") {
                     return false;
-                } else if (this.board[y + 1][x + i].letter != " " && this.board[y - 1][x + i].letter != " ") {
+                } else if (this.board[y][x + i].letter != word[i] && this.board[y][x + i].letter != ' ') {
+                    return false;
+                } else if (i != index && (this.board[y + 1][x + i].letter != " " || this.board[y - 1][x + i].letter != " ")) {
                     return false;
                 }
             }
@@ -122,8 +130,7 @@ $(function () {
 
         this.stripEdges = function () {
             //strip top
-            loop1:
-            for (let y = 0; y < this.board.length; y++) {
+            loop1: for (let y = 0; y < this.board.length; y++) {
                 for (let x = 0; x < this.board[y].length; x++) {
                     if (this.board[y][x].letter != " ") {
                         this.board.splice(0, y);
@@ -132,8 +139,7 @@ $(function () {
                 }
             }
             //strip bottom
-            loop1:
-            for (let y = this.board.length - 1; y > 0; y--) {
+            loop1: for (let y = this.board.length - 1; y > 0; y--) {
                 for (let x = 0; x < this.board[y].length; x++) {
                     if (this.board[y][x].letter != " ") {
                         this.board.splice(y + 1, );
@@ -142,27 +148,35 @@ $(function () {
                 }
             }
             //strip left and right
-            let leftMargin = this.board.length;
             let rightMargin = 0;
-            for (let y = 0; y < this.board.length; y ++) {
-                for (let x = 0; x < this.board[y].length; x++) {
-                    if (this.board[y][x].letter != " ") {
-                        if (x < leftMargin) {
-                            leftMargin = x;
-                        } else if (x > rightMargin) {
-                            rightMargin = x;
-                        }
-                        
+            for (let y = 0; y < this.board.length; y++) {
+                for (let x = 50; x < this.board[y].length; x++) {
+                    if (this.board[y][x].letter != " " && x > rightMargin) {
+                        rightMargin = x;
                     }
                 }
             }
 
-            for (let y = 0; y < this.board.length; y ++) {
+            let leftMargin = 0;
+            loop1: for (let y = 0; y < this.board.length; y++) {
+                for (let x = 50; x >= 0; x--) {
+                    let letterPresent = false;
+                    if (this.board[y][x].letter != " ") {
+                        letterPresent = true;
+                    }
+                    if (letterPresent == false && x > leftMargin) {
+                        leftMargin = x;
+                        break loop1;
+                    }
+                }
+            }
+
+            for (let y = 0; y < this.board.length; y++) {
                 this.board[y].splice(rightMargin + 1, this.board[y].length);
                 this.board[y].splice(0, leftMargin);
             }
 
-            
+
         }
     }
 
@@ -186,6 +200,7 @@ $(function () {
 
     $("#importSet").click(function () {
         // get the set with the given ID
+        num = 1;
         switched = false;
         $("#display-crossword").empty();
         $("#clue-list").empty();
@@ -223,7 +238,7 @@ $(function () {
         } else {
             var wordList = terms.map(term => [term.definition.toLowerCase().split(" ").join(''), term.term]);
         }
-        let wSBoard = (makeWordSearch(wordList));
+        let wSBoard = (makeWordSearch(wordList.slice(0, 29)));
         displayCrossword(wSBoard);
     }
 
@@ -238,7 +253,12 @@ $(function () {
                     $($col).addClass("black-box");
                 } else {
                     $($col).addClass("white-box");
-                    $($col).text(board[i][j].letter);
+                    if (board[i][j].num) {
+                        let $inner = $("<span>", {
+                            "text": board[i][j].num
+                        });
+                        $($col).append($inner);
+                    }
                 }
                 $($row).append($col);
             }
@@ -247,6 +267,16 @@ $(function () {
 
 
         // append clues to the page
+        $("#across").prepend("<h3>Across</h3>")
+        $("#down").prepend("<h3>Down</h3>")
+        for (let i = 0; i < board.length; i++) {
+            for (let j = 0; j < board[i].length; j++) {
+                //across clues
+                if (board[i][j].num) {
+                    $("#clue-list-across").append("<li>" + board[i][j].num + "</li>");
+                }
+            }
+        }
         // let clues = boardObj.clueList;
         // for (let clue of clues) {
         //     let $clue = $("<li>", {
@@ -270,6 +300,7 @@ $(function () {
 
     $("#switch").click(function () {
         // get the set with the given ID
+        num = 1;
         switched = true;
         $("#display-crossword").empty();
         $("#clue-list").empty();

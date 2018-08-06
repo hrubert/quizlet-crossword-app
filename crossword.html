@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>quiz-word | Crossword</title>
+    <title>Quiz-word | Crossword</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -23,7 +23,8 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p>Unable to place the following word(s): <span id="unplacedwords"></span>. Try increasing the puzzle size unless at max.</p>
+                <p>Unable to place the following word(s):
+                    <span id="unplacedwords"></span>.</p>
             </div>
         </div>
     </div>
@@ -32,13 +33,18 @@
 
 <!-- Main body container -->
 <div class="container">
-    <div id="heading">              
+    <div id="heading">
     </div>
     <h1 class="text-center" id="title">Make a Crossword</h1>
     <div id="display-crossword" class="row align-items-center">
     </div>
     <div class="container">
-        <ul id="clue-list" class="row"></ul>
+        <div id="across">
+            <ul id="clue-list-across" class="row"></ul>
+        </div>
+        <div id="down">
+            <ul class="clue-list-down" class="row"></ul>
+        </div>
     </div>
     <div class="form-inline">
         <div class="row"></div>
@@ -48,7 +54,7 @@
         <button type="button" class="btn btn-secondary col-md-3" id="switch">Switch terms and definitions</button>
     </div>
 </div>
-    
+
 </div>
 
 <body>

@@ -17,7 +17,7 @@ li {
     font-weight: bold;
 }
 
-#clue-list {
+#clue-list, .cluelist {
     text-align: center;
 }
 
@@ -44,4 +44,10 @@ li {
 .cwordRow {
     display: inline-flex;
     margin: auto;
+}
+
+span {
+    font-size: 8px;
+    position: relative;
+    top: -10px;
 }
