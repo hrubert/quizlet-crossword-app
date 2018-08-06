@@ -10,9 +10,37 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
         crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Anton|Oswald:700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="styles/wordSearch.css">
 </head>
+
 <body>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+            <a class="navbar-brand" href="index.html"><img src="images/quizword.png" width="100px"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a style="color:white" class="nav-link" href="#">Crossword</a>
+                </li>
+                <li class="nav-item">
+                    <a style="color:white" class="nav-link" href="#">Word Search</a>
+                </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0 ml-auto">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search a Topic" aria-label="Search">
+                    <button class="btn btn-outline my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
+
 <!-- modal pop-up if words are unplaced -->
 <div class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
@@ -33,6 +61,8 @@
 
 <!-- Main body container -->
 <div class="container">
+    <div class="row">
+            <div class="col-12 puzzle1">
     <div id="heading">              
     </div>
     <h1 class="text-center" id="title">Make a Word Search</h1>
@@ -52,9 +82,30 @@
         <label for="Size" class="col-2">Size of puzzle: </label>
         <input type="number" class="col-1" name="size" id="size" min="15" max="40" placeholder="15-40">
     </div>
+    </div>
+</div>
+</div>
 </div>
 
-</div>
+<footer class="row page-footer special-color-dark pt-4">
+        <!-- Footer Elements -->
+        <!-- Social buttons -->
+        <ul class="col-12 list-unstyled list-inline text-center">
+            <li class="list-inline-item">
+                <a href="https://github.com/melycm" target="_blank"><i class="fa fa-github github"></i></a>
+            </li>
+            <li class="list-inline-item">
+                <a href="https://github.com/hrubert" target="_blank"><i class="fa fa-github github"></i></a>
+            </li>
+        </ul>
+        <!-- Social buttons -->
+
+        <!-- Copyright -->
+        <div class="col-12 footer-copyright text-center pb-3">© 2018 Copyright: Tracy Herbert and Melissa Cantu
+        </div>
+        <!-- Copyright -->
+
+    </footer>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
