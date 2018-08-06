@@ -61,34 +61,33 @@
 
 <!-- Main body container -->
 <div class="container">
-    <div class="row">
-            <div class="col-12 puzzle1">
-    <div id="heading">              
+        <div class="row">
+                <div class="col-12 puzzle1">
+        <div id="heading">              
+        </div>
+        <h1 class="text-center" id="title">Make a Word Search</h1>
+        <div id="display-crossword">
+        </div>
+        <div class="container">
+            <ul id="clue-list" class="row"></ul>
+        </div>
+        <div class="form-inline">
+            <div class="row"></div>
+            <input type="url" class="form-control col-md-7 searchurl" name="setID" id="setID" aria-describedby="helpId" placeholder="url of quizlet set"
+                required>
+            <button type="button" class="btn btn-primary col-md-2 button1" id="importSet">Import quizlet set</button>
+            <button type="button" class="btn btn-secondary col-md-3 button2" id="switch">Switch terms and definitions</button>
+        </div>
+        <div class="row">
+            <label for="Size" class="col-md-2 col-5 sop">Size of puzzle: </label>
+            <input type="number" class="col-md-1 col-3 nop" name="size" id="size" min="15" max="40" placeholder="15-40">
+            <button type="button" class="btn btn-secondary col-md-2" id="answers">Get answer key</button>                
+        </div>
+        </div>
     </div>
-    <h1 class="text-center" id="title">Make a Word Search</h1>
-    <div id="display-crossword">
     </div>
-    <div class="container">
-        <ul id="clue-list" class="row"></ul>
-    </div>
-    <div class="form-inline">
-        <div class="row"></div>
-        <input type="url" class="form-control col-md-7" name="setID" id="setID" aria-describedby="helpId" placeholder="url of quizlet set"
-            required>
-        <button type="button" class="btn btn-primary col-md-2" id="importSet">Import quizlet set</button>
-        <button type="button" class="btn btn-secondary col-md-3" id="switch">Switch terms and definitions</button>
-    </div>
-    <div class="row">
-        <label for="Size" class="col-2">Size of puzzle: </label>
-        <input type="number" class="col-1" name="size" id="size" min="15" max="40" placeholder="15-40">
-        <button type="button" class="btn btn-secondary col-md-2" id="answers">Get answer key</button>        
-    </div>
-    </div>
-</div>
-</div>
-</div>
 
-<footer class="row page-footer special-color-dark pt-4">
+<footer class="row page-footer special-color-dark pt-4 footerPages">
         <!-- Footer Elements -->
         <!-- Social buttons -->
         <ul class="col-12 list-unstyled list-inline text-center">
