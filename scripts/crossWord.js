@@ -195,7 +195,7 @@ $(function () {
 
 
     function makeWordSearch(wordArr) {
-        let wSBoard = new Board(100);
+        let wSBoard = new Board(120);
         wSBoard.makeEmptyBoard();
         wSBoard.placeWords(wordArr);
         return wSBoard
@@ -236,9 +236,9 @@ $(function () {
         $("#title").text(obj.title);
         let terms = obj.terms;
         if (!switched) {
-            var wordList = terms.map(term => [term.term.toLowerCase().split(" ").join(''), term.definition]);
+            var wordList = terms.map(term => [term.term.toLowerCase().split(" ").join('').replace(/[^0-9a-z]/gi, ''), term.definition]);
         } else {
-            var wordList = terms.map(term => [term.definition.toLowerCase().split(" ").join(''), term.term]);
+            var wordList = terms.map(term => [term.definition.toLowerCase().split(" ").join('').replace(/[^0-9a-z]/gi, ''), term.term]);
         }
         let wSBoard = (makeWordSearch(wordList.slice(0, 29)));
         displayCrossword(wSBoard);
