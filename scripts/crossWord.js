@@ -1,12 +1,15 @@
 // Create a board git pull
 
 $(function () {
-    var num = 1;
+    
 
     function Board(size) {
         this.size = size;
         this.board = [];
         this.unplacedWords = [];
+        this.num = 1;
+        this.acrossClues = [];
+        this.downClues = [];
 
         // create an empty board to the given specifications
         this.makeEmptyBoard = function () {
@@ -73,12 +76,16 @@ $(function () {
                 if (i == 0) {
                     if (this.board[y][x].num) {
                         this.board[y][x] = new Letter(word[0][i], true, word[1], this.board[y][x].num);
+                        this.downClues.push([this.board[y][x].num, word[1]]);                                                                    
                     } else {
-                        this.board[y][x] = new Letter(word[0][i], false, word[1], num);
-                        num++;
+                        this.board[y][x] = new Letter(word[0][i], false, word[1], this.num);
+                        this.downClues.push([this.num, word[1]]);                    
+                        this.num++;
                     }
                 } else {
-                    this.board[y + i][x] = new Letter(word[0][i], false, word[1]);
+                    if (!this.board[y + i][x].num) {                    
+                        this.board[y + i][x] = new Letter(word[0][i], false, word[1]);
+                    }
                 }
             }
 
@@ -104,12 +111,16 @@ $(function () {
                 if (i == 0) {
                     if (this.board[y][x].num) {
                         this.board[y][x] = new Letter(word[0][i], true, word[1], this.board[y][x].num);
+                        this.acrossClues.push([this.board[y][x].num, word[1]]);                                                
                     } else {
-                        this.board[y][x + i] = new Letter(word[0][i], true, word[1], num);
-                        num++;
+                        this.board[y][x + i] = new Letter(word[0][i], true, word[1], this.num);
+                        this.acrossClues.push([this.num, word[1]]);                                                
+                        this.num++;
                     }
                 } else {
-                    this.board[y][x + i] = new Letter(word[0][i], true, word[1]);
+                    if (!this.board[y][x + i].num) {
+                        this.board[y][x + i] = new Letter(word[0][i], true, word[1]);
+                    }
                 }
             }
         }
@@ -200,11 +211,12 @@ $(function () {
 
     $("#importSet").click(function () {
         // get the set with the given ID
-        num = 1;
         switched = false;
         $("#display-crossword").empty();
         $("#clue-list").empty();
         $("#heading").empty();
+        $("#across").empty();
+        $("#down").empty();
         let url = $("#setID").val();
         importSet(url);
     });
@@ -253,6 +265,7 @@ $(function () {
                     $($col).addClass("black-box");
                 } else {
                     $($col).addClass("white-box");
+                    $($col).attr("letter", board[i][j].letter);
                     if (board[i][j].num) {
                         let $inner = $("<span>", {
                             "text": board[i][j].num
@@ -265,26 +278,17 @@ $(function () {
             $("#display-crossword").append($row);
         };
 
-
         // append clues to the page
-        $("#across").prepend("<h3>Across</h3>")
-        $("#down").prepend("<h3>Down</h3>")
-        for (let i = 0; i < board.length; i++) {
-            for (let j = 0; j < board[i].length; j++) {
-                //across clues
-                if (board[i][j].num) {
-                    $("#clue-list-across").append("<li>" + board[i][j].num + "</li>");
-                }
-            }
+        $("#across").append("<h3>Across</h3>");
+        $("#across").append('<ul id="clue-list-across" class="row"></ul>');
+        $("#down").append("<h3>Down</h3>");
+        $("#down").append('<ul id="clue-list-down" class="row"></ul>');        
+        for (let i = 0; i < boardObj.downClues.length; i++) {
+            $("#clue-list-down").append(`<li class="col-md-2">${boardObj.downClues[i][0]}. ${boardObj.downClues[i][1]} </li>`);
         }
-        // let clues = boardObj.clueList;
-        // for (let clue of clues) {
-        //     let $clue = $("<li>", {
-        //         "text": clue,
-        //         "class": "col-md-2"
-        //     })
-        //     $("#clue-list").append($clue);
-        // }
+        for (let i = 0; i < boardObj.acrossClues.length; i++) {
+            $("#clue-list-across").append(`<li class="col-md-2">${boardObj.acrossClues[i][0]}. ${boardObj.acrossClues[i][1]} </li>`);
+        }
 
         $("#heading").append("<p>Name:</p>");
         $("#heading").append("<p>Date:</p>");
@@ -300,12 +304,21 @@ $(function () {
 
     $("#switch").click(function () {
         // get the set with the given ID
-        num = 1;
         switched = true;
         $("#display-crossword").empty();
         $("#clue-list").empty();
         $("#heading").empty();
+        $("#across").empty();
+        $("#down").empty();
         let url = $("#setID").val();
         importSet(url);
     });
+
+    $("#answers").click(function () {
+        let $letterSquares = $(".white-box");
+        $letterSquares.each(function(i) {
+            $(this).append("<p>" + $(this).attr("letter") + "</p>");
+            $("span").hide()
+        });
+    })
 });
