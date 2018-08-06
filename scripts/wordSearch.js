@@ -59,7 +59,7 @@ $(function () {
             if (!this.unplacedWords.includes(word)) {
                 this.clueList.push(clue);
                 for (let i = 0; i < word.length; i++) {
-                    this.board[y][x + i] = word[i].toUpperCase();
+                    this.board[y][x + i] = [word[i].toUpperCase(), true];
                 }
             }
         }
@@ -92,7 +92,7 @@ $(function () {
             if (!this.unplacedWords.includes(word)) {
                 this.clueList.push(clue);
                 for (let i = 0; i < word.length; i++) {
-                    this.board[y + i][x] = word[i].toUpperCase();
+                    this.board[y + i][x] = [word[i].toUpperCase(), true];
                 }
             }
         }
@@ -104,7 +104,7 @@ $(function () {
             for (let i = 0; i < this.board.length; i++) {
                 for (let j = 0; j < this.board[i].length; j++) {
                     if (this.board[i][j] == ' ') {
-                        this.board[i][j] = alphabet[Math.floor(Math.random() * 26)].toUpperCase();
+                        this.board[i][j] = [alphabet[Math.floor(Math.random() * 26)].toUpperCase(), false];
                     }
                 }
             }
@@ -114,7 +114,7 @@ $(function () {
 
     function makeWordSearch(wordArr) {
         let userSize = $("#size").val();
-        setSize(userSize);            
+        setSize(userSize);
         let wSBoard = new Board(size);
         wSBoard.makeEmptyBoard();
         wSBoard.placeWords(wordArr);
@@ -127,19 +127,19 @@ $(function () {
 
 
     $("#importSet").click(function () {
-    // get the set with the given ID
-    switched = false;
-    $("#display-crossword").empty();
-    $("#clue-list").empty();
-    $("#heading").empty();
-    let url = $("#setID").val();
-    importSet(url);
+        // get the set with the given ID
+        switched = false;
+        $("#display-crossword").empty();
+        $("#clue-list").empty();
+        $("#heading").empty();
+        let url = $("#setID").val();
+        importSet(url);
     });
 
-    function setSize(userSize){
+    function setSize(userSize) {
         if (!userSize) {
             size = 40;
-        }else if (userSize < 15) {
+        } else if (userSize < 15) {
             size = 15;
         } else if (userSize > 40) {
             size = 40;
@@ -164,29 +164,35 @@ $(function () {
         return /\d{6,}/g.exec(url)[0];
     }
 
-    function extractSetInfo(obj){
+    function extractSetInfo(obj) {
         $("#title").text(obj.title);
         let terms = obj.terms;
         if (!switched) {
             var wordList = terms.map(term => [term.term.toLowerCase().split(" ").join(''), term.definition]);
         } else {
-            var wordList = terms.map(term => [term.definition.toLowerCase().split(" ").join(''), term.term]);            
+            var wordList = terms.map(term => [term.definition.toLowerCase().split(" ").join(''), term.term]);
         }
-        
+
         let wSBoard = (makeWordSearch(wordList));
         displayCrossword(wSBoard);
     }
 
     function displayCrossword(boardObj) {
         let board = boardObj.board;
-        for (let row of board) {
-            let $row = $("<p>", {
-                "text": row.join(""),
+        for (let y = 0; y < board.length; y++) {
+            let $row = $("<div>", {
                 "class": "text-center word-row"
             });
+            for (let x = 0; x < board[y].length; x++) {
+                if (board[y][x][1] == false) {
+                    $($row).append(`<p class="letters word-row">${board[y][x][0]}</p>`);
+                } else {
+                    $($row).append(`<p class="letters reveal word-row">${board[y][x][0]}</p>`);
+                }
+            }
             $("#display-crossword").append($row);
         }
-    
+
         // append clues to the page
         let clues = boardObj.clueList;
         for (let clue of clues) {
@@ -211,11 +217,15 @@ $(function () {
 
     $("#switch").click(function () {
         // get the set with the given ID
-        switched = true;        
+        switched = true;
         $("#display-crossword").empty();
         $("#clue-list").empty();
         $("#heading").empty();
         let url = $("#setID").val();
         importSet(url);
-        });
+    });
+
+    $("#answers").click(function () {
+        $(".reveal").toggleClass("orange");
+    })
 });
