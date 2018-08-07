@@ -60,3 +60,7 @@ li {
 .orange {
     background-color: orange;
 }
+
+.button-container {
+    margin-bottom: 10%;
+}

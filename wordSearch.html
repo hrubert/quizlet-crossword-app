@@ -73,55 +73,56 @@
                 </div>
                 <h1 class="text-center" id="title">Make a Word Search</h1>
                 <div id="display-crossword">
+                    
                 </div>
                 <div class="container">
                     <ul id="clue-list" class="row"></ul>
                 </div>
-                <div class="form-inline">
-                    <div class="row"></div>
-                    <input type="url" class="form-control col-md-7 searchurl" name="setID" id="setID" aria-describedby="helpId" placeholder="url of quizlet set"
-                        required>
-                    <button type="button" class="btn btn-primary col-md-2 button1" id="importSet">Import quizlet set</button>
-                    <button type="button" class="btn btn-secondary col-md-3 button2" id="switch">Switch terms and definitions</button>
-                </div>
-                <div class="row bottombutt">
-                    <label for="Size" class="col-md-2 col-5 sop">Size of puzzle: </label>
-                    <input type="number" class="col-md-1 col-3 nop" name="size" id="size" min="15" max="40" placeholder="15-40">
-                    <button type="button" class="btn btn-secondary col-md-2" id="answers">Get answer key</button>
-                    <button onclick="javascript:demoFromHTML();">PDF</button>
-                    <button type="button" class="btn btn-secondary col-md-2" id="answers">Show/hide answers</button>
-                </div>
             </div>
         </div>
     </div>
-
-    <footer class="row page-footer special-color-dark pt-4 footerPages">
-        <!-- Footer Elements -->
-        <!-- Social buttons -->
-        <ul class="col-12 list-unstyled list-inline text-center">
-            <li class="list-inline-item">
-                <a href="https://github.com/hrubert" target="_blank">
-                    <i class="fa fa-github github"></i>
-                </a>
-            </li>
-            <li class="list-inline-item">
-                <a href="https://github.com/melycm" target="_blank">
-                    <i class="fa fa-github github"></i>
-                </a>
-            </li>
-        </ul>
-        <!-- Social buttons -->
-
-        <!-- Copyright -->
-        <div class="col-12 footer-copyright text-center pb-3">© 2018 Copyright: Tracy Herbert and Melissa Cantu
+    <div class="container button-container">
+        <div class="form-inline">
+            <div class="row"></div>
+            <input type="url" class="form-control col-md-7 searchurl" name="setID" id="setID" aria-describedby="helpId" placeholder="url of quizlet set"
+                required>
+            <button type="button" class="btn btn-primary col-md-2 button1" id="importSet">Import quizlet set</button>
+            <button type="button" class="btn btn-secondary col-md-3 button2" id="switch">Switch terms and definitions</button>
         </div>
-        <!-- Copyright -->
+        <div class="row">
+            <label for="Size" class="col-md-2 col-5 sop">Size of puzzle: </label>
+            <input type="number" class="col-md-1 col-3 nop" name="size" id="size" min="15" max="40" placeholder="15-40">
+            <button onclick="javascript:demoFromHTML();">PDF</button>
+            <button type="button" class="btn btn-secondary col-md-2" id="answers">Show/hide answers</button>
+        </div>
+    </div>
+    <footer class="row page-footer special-color-dark pt-4 footerPages">
+    <!-- Footer Elements -->
+    <!-- Social buttons -->
+    <ul class="col-12 list-unstyled list-inline text-center">
+        <li class="list-inline-item">
+            <a href="https://github.com/hrubert" target="_blank">
+                <i class="fa fa-github github"></i>
+            </a>
+        </li>
+        <li class="list-inline-item">
+            <a href="https://github.com/melycm" target="_blank">
+                <i class="fa fa-github github"></i>
+            </a>
+        </li>
+    </ul>
+    <!-- Social buttons -->
+
+    <!-- Copyright -->
+    <div class="col-12 footer-copyright text-center pb-3">© 2018 Copyright: Tracy Herbert and Melissa Cantu
+    </div>
+    <!-- Copyright -->
     </footer>
 
     <script>
         function demoFromHTML() {
             html2canvas(document.getElementById("everything"), {
-                onrendered: function(canvas) {
+                onrendered: function (canvas) {
                     var img = canvas.toDataURL("images/png", 1.0);
                     var doc = new jsPDF("p", "mm", "a4");
                     doc.addImage(img, 'JPEG', 10, 10, 190, 280);
