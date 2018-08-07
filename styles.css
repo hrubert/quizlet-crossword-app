@@ -311,6 +311,14 @@ footer a:hover {
     .button-container {
         margin-bottom: 40%;
     }
+
+    .button1 {
+        margin-right: 0;
+    }
+
+    .searchurl {
+        margin-right: 0;
+    }
 }
 
 @media only screen and (max-width: 768px){
