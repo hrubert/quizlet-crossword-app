@@ -240,7 +240,11 @@ $(function () {
         } else {
             var wordList = terms.map(term => [term.definition.toLowerCase().split(" ").join('').replace(/[^0-9a-z]/gi, ''), term.term]);
         }
-        let wSBoard = (makeWordSearch(wordList.slice(0, 29)));
+        let start = $("#start").val() - 1;
+        if (start < 0) {
+            start = 0;
+        }
+        let wSBoard = (makeWordSearch(wordList.slice(start, start + 29)));
         displayCrossword(wSBoard);
     }
 

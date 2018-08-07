@@ -168,9 +168,9 @@ $(function () {
         $("#title").text(obj.title);
         let terms = obj.terms;
         if (!switched) {
-            var wordList = terms.map(term => [term.term.toLowerCase().split(" ").join('').replace(/[^0-9a-z]/gi), term.definition]);
+            var wordList = terms.map(term => [term.term.toLowerCase().split(" ").join('').replace(/[^0-9a-z]/gi, ''), term.definition]);
         } else {
-            var wordList = terms.map(term => [term.definition.toLowerCase().split(" ").join('').replace(/[^0-9a-z]/gi), term.term]);
+            var wordList = terms.map(term => [term.definition.toLowerCase().split(" ").join('').replace(/[^0-9a-z]/gi, ''), term.term]);
         }
 
         let wSBoard = (makeWordSearch(wordList));
