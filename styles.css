@@ -4,13 +4,10 @@ html{
 }
 body {
    background-color: #dad8d8;
-   
 }
 
 .container {
     font-family: 'Quicksand', sans-serif;
- 
-
 }
 
 .navbar {
@@ -209,6 +206,15 @@ footer a:hover {
     margin-top: 13%;
     margin-bottom: 12%;
     font-family: 'Quicksand', sans-serif;
+}
+
+.bottombutt {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.crossline {
+    text-align: center;
 }
 
 @media only screen and (max-width: 600px){
