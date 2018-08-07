@@ -175,21 +175,6 @@ a {
     color: white;
     font-size: 13px;
 }
-/* footer {
-    background-color: #003459;
-    color: white;
-    font-size: 13px;
-    -webkit-box-shadow: 0 8px 6px -6px #999;
-    -moz-box-shadow: 0 8px 6px -6px #999;
-    box-shadow: 0 8px 8px 3px #999;
-    padding: 5px;
-    font-family: 'Quicksand', sans-serif;
-    position: absolute; 
-    bottom: 0px;
-    width: 100%;
-} */
-
-
 
 footer a {
     color: rgb(255, 255, 255);
@@ -217,6 +202,43 @@ footer a:hover {
     text-align: center;
 }
 
+.button1 {
+    background-color: #003459;
+    border: none;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.button2 {
+    background-color: #003459;
+    border: none;
+    margin-bottom: 5px;
+}
+
+.button3 {
+    background-color: #003459;
+    color: white;
+    margin-right: 5px;
+}
+
+.button4 {
+    background-color: #003459;
+}
+
+.searchurl {
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.buttonsWS {
+    display: flex;
+    justify-content: flex-end; 
+    margin-right: 18px;
+}
+
+.nop {
+    margin-right: 5px;
+}
 @media only screen and (max-width: 600px){
     .square1 {
         background-image: url(images/classroom.jpg);
@@ -300,5 +322,9 @@ footer a:hover {
 
     .sop {
         margin-left: 35px;
+    }
+
+    .button-container {
+        margin-bottom: 40%;
     }
 }

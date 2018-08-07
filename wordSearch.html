@@ -102,14 +102,13 @@
             <div class="row"></div>
             <input type="url" class="form-control col-md-7 searchurl" name="setID" id="setID" aria-describedby="helpId" placeholder="url of quizlet set"
                 required>
-            <button type="button" class="btn btn-primary col-md-2 button1" id="importSet">Import quizlet set</button>
+            <button type="button" class="btn btn-secondary col-md-2 button1" id="importSet">Import quizlet set</button>
             <button type="button" class="btn btn-secondary col-md-3 button2" id="switch">Switch terms and definitions</button>
         </div>
-        <div class="row">
-            <label for="Size" class="col-md-2 col-5 sop">Size of puzzle: </label>
-            <input type="number" class="col-md-1 col-3 nop" name="size" id="size" min="15" max="40" placeholder="15-40">
-            <button onclick="javascript:demoFromHTML();">PDF</button>
-            <button type="button" class="btn btn-secondary col-md-2" id="answers">Show/hide answers</button>
+        <div class="row buttonsWS">
+            <input type="number" class="col-md-3 col-3 nop" name="size" id="size" min="15" max="40" placeholder="Size of puzzle: 15-40">
+            <button type="button" class="btn col-md-2 btn-secondary button3" onclick="javascript:demoFromHTML();">PDF</button>
+            <button type="button" class="btn btn-secondary col-md-3 button4" id="answers">Show/hide answers</button>
         </div>
     </div>
     <footer class="row page-footer special-color-dark pt-4 footerPages">
