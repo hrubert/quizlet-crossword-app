@@ -305,16 +305,18 @@ footer a:hover {
     }
 
     .searchurl {
-        margin-left: 30px;
+        margin-left: 20px;
         margin-bottom: 5px;
     }
 
     .button1 {
         margin-bottom: 5px;
+        margin-left: 20%;
     }
     
     .button2 {
         margin-bottom: 5px;
+        margin-left: 20%;
     }
 
     .sop {
@@ -324,5 +326,8 @@ footer a:hover {
     .button-container {
         margin-bottom: 40%;
     }
+
+
+
 }
 
