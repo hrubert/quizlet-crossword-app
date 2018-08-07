@@ -111,7 +111,7 @@
                         <div class="white-box"></div>
                         <div class="black-box"></div>
                     </div>
-                    <div class="w-100"></div>                    
+                    <div class="w-100"></div>
                     <div class="cwordRow">
                         <div class="black-box"></div>
                         <div class="black-box"></div>
@@ -125,7 +125,7 @@
                         <div class="black-box"></div>
                         <div class="black-box"></div>
                     </div>
-                    <div class="w-100"></div>                    
+                    <div class="w-100"></div>
                     <div class="cwordRow">
                         <div class="white-box">
                             <span>7</span>
@@ -147,7 +147,7 @@
                         </div>
                         <div class="black-box"></div>
                     </div>
-                    <div class="w-100"></div>                    
+                    <div class="w-100"></div>
                     <div class="cwordRow">
                         <div class="white-box"></div>
                         <div class="black-box"></div>
@@ -161,7 +161,7 @@
                         <div class="white-box"></div>
                         <div class="black-box"></div>
                     </div>
-                    <div class="w-100"></div>                    
+                    <div class="w-100"></div>
                     <div class="cwordRow">
                         <div class="white-box"></div>
                         <div class="black-box"></div>
@@ -177,7 +177,7 @@
                         <div class="white-box"></div>
                         <div class="black-box"></div>
                     </div>
-                    <div class="w-100"></div>                    
+                    <div class="w-100"></div>
                     <div class="cwordRow">
                         <div class="white-box">
                             <span>12</span>
@@ -193,7 +193,7 @@
                         <div class="white-box"></div>
                         <div class="black-box"></div>
                     </div>
-                    <div class="w-100"></div>                    
+                    <div class="w-100"></div>
                     <div class="cwordRow">
                         <div class="white-box"></div>
                         <div class="black-box"></div>
@@ -209,7 +209,7 @@
                         <div class="white-box"></div>
                         <div class="white-box"></div>
                     </div>
-                    <div class="w-100"></div>                    
+                    <div class="w-100"></div>
                     <div class="cwordRow">
                         <div class="black-box"></div>
                         <div class="black-box"></div>
@@ -229,7 +229,7 @@
                         <div class="white-box"></div>
                         <div class="black-box"></div>
                     </div>
-                    <div class="w-100"></div>                    
+                    <div class="w-100"></div>
                     <div class="cwordRow">
                         <div class="black-box"></div>
                         <div class="black-box"></div>
@@ -243,14 +243,18 @@
                         <div class="black-box"></div>
                         <div class="black-box"></div>
                     </div>
-                    <div class="w-100"></div>                    
+                    <div class="w-100"></div>
                     <div class="cwordRow">
-                        <div class="white-box"><span>17</span></div>
+                        <div class="white-box">
+                            <span>17</span>
+                        </div>
                         <div class="white-box"></div>
                         <div class="white-box"></div>
                         <div class="white-box"></div>
                         <div class="black-box"></div>
-                        <div class="white-box"><span>18</span></div>
+                        <div class="white-box">
+                            <span>18</span>
+                        </div>
                         <div class="white-box"></div>
                         <div class="white-box"></div>
                         <div class="white-box"></div>
@@ -271,19 +275,18 @@
     </div>
 
     <div class="container button-container">
-        <div class="form-inline">
-            <div class="row"></div>
-            <input type="url" class="form-control col-md-7 searchurl" name="setID" id="setID" aria-describedby="helpId" placeholder="url of quizlet set"
+        <div class="row">
+            <input type="url" class="form-control col-md-6 searchurl" name="setID" id="setID" aria-describedby="helpId" placeholder="URL of quizlet set"
                 required>
-            <button type="button" class="btn btn-primary col-md-2" id="importSet">Import quizlet set</button>
-            <button type="button" class="btn btn-secondary col-md-3" id="switch">Switch terms and definitions</button>
-            <div class="row justify-content-center">
-                <label for="start">Crossword will display up to 30 terms. Start crossword with term :</label>
-                <input type="number" name="startAt" id="start" class="col-md-1" placeholder=1>
-                <button type="button" class="btn btn-secondary col-md-3" id="answers">Show/hide answers</button>
-                <button onclick="javascript:demoFromHTML();">PDF</button>
-            </div>
+            <button type="button" class="btn btn-secondary col-md-2 button1" id="importSet">Import quizlet set</button>
+            <button type="button" class="btn btn-secondary col-md-3 button2" id="switch">Switch terms and definitions</button>
         </div>
+        <div class="row">
+            <input type="number" name="startAt" id="start" class="col-md-6 searchurl" placeholder="Start crossword with term: 1">
+            <button type="button" class="btn col-md-2 btn-secondary button1" onclick="javascript:demoFromHTML();">PDF</button>
+            <button type="button" class="btn btn-secondary col-md-3 button2" id="answers">Show/hide answers</button>
+        </div>
+    </div>
     </div>
 
 

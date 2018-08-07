@@ -236,9 +236,6 @@ footer a:hover {
     margin-right: 18px;
 }
 
-.nop {
-    /* margin-right: 5px; */
-}
 @media only screen and (max-width: 600px){
     .square1 {
         background-image: url(images/classroom.jpg);
@@ -328,3 +325,4 @@ footer a:hover {
         margin-bottom: 40%;
     }
 }
+
