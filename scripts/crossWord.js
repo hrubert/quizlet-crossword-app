@@ -3,6 +3,7 @@ let click = 0;
 
 $(function () {
     $("#answers").attr("disabled", "disabled");
+    $("#pdf").attr("disabled", "disabled");
 
     function Board(size) {
         this.size = size;
@@ -207,7 +208,8 @@ $(function () {
 
     $("#importSet").click(function () {
         click = 0;
-        $("#answers").removeAttr("disabled");        
+        $("#answers").removeAttr("disabled");
+        $("#pdf").removeAttr("disabled");                        
         // get the set with the given ID
         switched = false;
         $("#display-crossword").empty();
@@ -296,7 +298,8 @@ $(function () {
     $("#switch").click(function () {
         // get the set with the given ID
         click = 0;
-        $("#answers").removeAttr("disabled");                
+        $("#answers").removeAttr("disabled"); 
+        $("#pdf").removeAttr("disabled");                               
         switched = true;
         $("#display-crossword").empty();
         $("#clue-list").empty();

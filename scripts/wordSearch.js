@@ -1,6 +1,7 @@
 // Create a board object
 $(function () {
-    $("#answers").attr("disabled", "disabled");    
+    $("#answers").attr("disabled", "disabled");
+    $("#pdf").attr("disabled", "disabled");        
 
     function Board(size) {
         this.size = size;
@@ -129,7 +130,8 @@ $(function () {
 
     $("#importSet").click(function () {
         // get the set with the given ID
-        $("#answers").removeAttr("disabled");                
+        $("#answers").removeAttr("disabled");
+        $("#pdf").removeAttr("disabled");                                        
         switched = false;
         $("#display-crossword").empty();
         $("#clue-list").empty();
@@ -200,7 +202,7 @@ $(function () {
         for (let clue of clues) {
             let $clue = $("<li>", {
                 "text": clue,
-                "class": "col-md-2"
+                "class": "col-6 col-md-2"
             })
             $("#clue-list").append($clue);
         }
@@ -219,7 +221,8 @@ $(function () {
 
     $("#switch").click(function () {
         // get the set with the given ID
-        $("#answers").removeAttr("disabled");                
+        $("#answers").removeAttr("disabled");
+        $("#pdf").removeAttr("disabled");                                       
         switched = true;
         $("#display-crossword").empty();
         $("#clue-list").empty();
