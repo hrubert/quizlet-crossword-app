@@ -4,7 +4,15 @@
     font-weight: 500;
     line-height: .3em;
     letter-spacing: .5em;
-    margin-top: 1em;
+    margin-top: 1em;  
+}
+
+@media only screen and (max-width: 600px) {
+    .word-row {
+        font-size: .9em;
+        letter-spacing: .2em;
+        margin-top: .5em;
+    }
 }
 
 #display-crossword {
