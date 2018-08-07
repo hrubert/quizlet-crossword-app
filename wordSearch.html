@@ -97,7 +97,7 @@
             </div>
         </div>
     </div>
-    <div class="container button-container pb-5">
+    <div class="container button-container">
         <div class="row">
             <input type="url" class="form-control col-md-6 searchurl" name="setID" id="setID" aria-describedby="helpId" placeholder="URL of quizlet set"
                 required>
@@ -139,7 +139,7 @@
                 onrendered: function (canvas) {
                     var img = canvas.toDataURL("images/png", 1.0);
                     var doc = new jsPDF("p", "mm", "a4");
-                    doc.addImage(img, 'JPEG', 10, 10, 190, 280);
+                    doc.addImage(img, 'JPEG', 10, 10, 190, 240);
                     // doc.save('test.pdf');
                     window.open(doc.output('bloburl'), '_blank');
                 }
