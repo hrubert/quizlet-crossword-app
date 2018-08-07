@@ -1,7 +1,9 @@
 // Create a board git pull
+let click = 0;
 
 $(function () {
 
+    $("#answers").attr("disabled", "disabled");
 
     function Board(size) {
         this.size = size;
@@ -205,6 +207,7 @@ $(function () {
 
 
     $("#importSet").click(function () {
+        $("#answers").removeAttr("disabled");        
         // get the set with the given ID
         switched = false;
         $("#display-crossword").empty();
@@ -292,6 +295,7 @@ $(function () {
 
     $("#switch").click(function () {
         // get the set with the given ID
+        $("#answers").removeAttr("disabled");                
         switched = true;
         $("#display-crossword").empty();
         $("#clue-list").empty();
@@ -303,11 +307,14 @@ $(function () {
     });
 
     $("#answers").click(function () {
-        $(".white-box").empty();
-        let $letterSquares = $(".white-box");
-        $letterSquares.each(function (i) {
-            $(this).append("<p class='text-center'>" + $(this).attr("letter") + "</p>");
-            $("span").hide()
-        });
+        $("span").toggle()
+        $(".letters").toggle();
+        if (click == 0) {
+            let $letterSquares = $(".white-box");
+            $letterSquares.each(function (i) {
+                $(this).append("<p class='text-center letters'>" + $(this).attr("letter") + "</p>");
+            });
+            click ++;
+        }
     })
 });
