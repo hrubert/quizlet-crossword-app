@@ -1,7 +1,7 @@
 // Create a board git pull
 
 $(function () {
-    
+
 
     function Board(size) {
         this.size = size;
@@ -76,14 +76,14 @@ $(function () {
                 if (i == 0) {
                     if (this.board[y][x].num) {
                         this.board[y][x] = new Letter(word[0][i], true, word[1], this.board[y][x].num);
-                        this.downClues.push([this.board[y][x].num, word[1]]);                                                                    
+                        this.downClues.push([this.board[y][x].num, word[1]]);
                     } else {
                         this.board[y][x] = new Letter(word[0][i], false, word[1], this.num);
-                        this.downClues.push([this.num, word[1]]);                    
+                        this.downClues.push([this.num, word[1]]);
                         this.num++;
                     }
                 } else {
-                    if (!this.board[y + i][x].num) {                    
+                    if (!this.board[y + i][x].num) {
                         this.board[y + i][x] = new Letter(word[0][i], false, word[1]);
                     }
                 }
@@ -111,10 +111,10 @@ $(function () {
                 if (i == 0) {
                     if (this.board[y][x].num) {
                         this.board[y][x] = new Letter(word[0][i], true, word[1], this.board[y][x].num);
-                        this.acrossClues.push([this.board[y][x].num, word[1]]);                                                
+                        this.acrossClues.push([this.board[y][x].num, word[1]]);
                     } else {
                         this.board[y][x + i] = new Letter(word[0][i], true, word[1], this.num);
-                        this.acrossClues.push([this.num, word[1]]);                                                
+                        this.acrossClues.push([this.num, word[1]]);
                         this.num++;
                     }
                 } else {
@@ -270,13 +270,14 @@ $(function () {
                 $($row).append($col);
             }
             $("#display-crossword").append($row);
+            $("#display-crossword").append("<div class = 'w-100' >");
         };
 
         // append clues to the page
         $("#across").append("<h3>Across</h3>");
         $("#across").append('<ul id="clue-list-across" class="row"></ul>');
         $("#down").append("<h3>Down</h3>");
-        $("#down").append('<ul id="clue-list-down" class="row"></ul>');        
+        $("#down").append('<ul id="clue-list-down" class="row"></ul>');
         for (let i = 0; i < boardObj.downClues.length; i++) {
             $("#clue-list-down").append(`<li class="col-md-2">${boardObj.downClues[i][0]}. ${boardObj.downClues[i][1]} </li>`);
         }
@@ -304,7 +305,7 @@ $(function () {
     $("#answers").click(function () {
         $(".white-box").empty();
         let $letterSquares = $(".white-box");
-        $letterSquares.each(function(i) {
+        $letterSquares.each(function (i) {
             $(this).append("<p class='text-center'>" + $(this).attr("letter") + "</p>");
             $("span").hide()
         });
