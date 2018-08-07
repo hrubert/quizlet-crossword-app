@@ -207,6 +207,7 @@ $(function () {
 
 
     $("#importSet").click(function () {
+        click = 0;
         $("#answers").removeAttr("disabled");        
         // get the set with the given ID
         switched = false;
@@ -295,6 +296,7 @@ $(function () {
 
     $("#switch").click(function () {
         // get the set with the given ID
+        click = 0;
         $("#answers").removeAttr("disabled");                
         switched = true;
         $("#display-crossword").empty();
