@@ -2,7 +2,6 @@
 let click = 0;
 
 $(function () {
-
     $("#answers").attr("disabled", "disabled");
 
     function Board(size) {
