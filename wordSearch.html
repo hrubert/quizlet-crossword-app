@@ -66,7 +66,7 @@
 
 
     <!-- Main body container -->
-    <div class="container">
+    <div class="container" id="everything">
         <div class="row">
             <div class="col-12 puzzle1">
                 <div id="heading">
@@ -88,6 +88,7 @@
                     <label for="Size" class="col-md-2 col-5 sop">Size of puzzle: </label>
                     <input type="number" class="col-md-1 col-3 nop" name="size" id="size" min="15" max="40" placeholder="15-40">
                     <button type="button" class="btn btn-secondary col-md-2" id="answers">Get answer key</button>
+                    <button onclick="javascript:demoFromHTML();">PDF</button>
                 </div>
             </div>
         </div>
@@ -121,9 +122,10 @@
             html2canvas(document.getElementById("everything"), {
                 onrendered: function(canvas) {
                     var img = canvas.toDataURL("images/png", 1.0);
-                    var doc = new jsPDF("p", "mm", "letter");
-                    doc.addImage(img, 'JPEG', 0, 0);
-                    doc.save('test.pdf');
+                    var doc = new jsPDF("p", "mm", "a4");
+                    doc.addImage(img, 'JPEG', 10, 10, 190, 280);
+                    // doc.save('test.pdf');
+                    window.open(doc.output('bloburl'), '_blank');
                 }
             })
         }
