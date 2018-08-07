@@ -1,5 +1,6 @@
 // Create a board object
 $(function () {
+    $("#answers").attr("disabled", "disabled");    
 
     function Board(size) {
         this.size = size;
@@ -128,6 +129,7 @@ $(function () {
 
     $("#importSet").click(function () {
         // get the set with the given ID
+        $("#answers").removeAttr("disabled");                
         switched = false;
         $("#display-crossword").empty();
         $("#clue-list").empty();
@@ -217,6 +219,7 @@ $(function () {
 
     $("#switch").click(function () {
         // get the set with the given ID
+        $("#answers").removeAttr("disabled");                
         switched = true;
         $("#display-crossword").empty();
         $("#clue-list").empty();

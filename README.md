@@ -1,4 +1,4 @@
-# quiz-word:quizlet-crossword-app
+# quiz-word__quizlet-crossword-app
 Web application to allow users to import an existing vocabulary set from quizlet by url and generate a crossword or word search based on their terms or definitions. Users have the ability to display the correct answers, and to print a pdf of their results.
 
 ## Link to site
