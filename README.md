@@ -14,6 +14,7 @@ Web application to allow users to import an existing vocabulary set from quizlet
 * [jQuery](https://jquery.com/)
 * [Bootstrap](https://getbootstrap.com/)
 * [html2canvas](https://html2canvas.hertzen.com/)
+* [vectr](https://vectr.com/)
 
 ## Authors
 
