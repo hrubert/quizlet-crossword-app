@@ -1,0 +1,24 @@
+{
+  "name": "quizletcrosswordapp",
+  "version": "1.0.0",
+  "description": "Web application to allow users to import an existing vocabulary set from quizlet by url and generate a crossword or word search based on their terms or definitions. Users have the ability to display the correct answers, and to print a pdf of their results.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hrubert/quizlet-crossword-app.git"
+  },
+  "author": "Tracy Herbert",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hrubert/quizlet-crossword-app/issues"
+  },
+  "homepage": "https://github.com/hrubert/quizlet-crossword-app#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.4",
+    "express": "^4.16.3"
+  }
+}
