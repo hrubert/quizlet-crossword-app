@@ -20,7 +20,7 @@ app.get('/crossword', function (req, res) {
 });
 
 app.get('/wordsearch', function (req, res) {
-    res.sendFile(path.join(__dirname+'/wordsearch.html'));
+    res.sendFile(path.join(__dirname+'/wordSearch.html'));
 });
 
 app.listen(PORT, () => {
