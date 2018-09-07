@@ -1,7 +1,7 @@
-let express = require('express');
-let app = express();
-var path = require('path');
-var bodyParser = require('body-parser');
+const express = require('express')
+const app = express()
+const path = require('path')
+const PORT = process.env.PORT || 3000
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -26,6 +26,6 @@ app.get('/wordsearch', function (req, res) {
     res.sendFile(path.join(__dirname+'/wordsearch.html'));
 });
 
-app.listen(3000, () => {
-    console.log("listening on port 3000");
+app.listen(PORT, () => {
+    console.log(`listening on port ${PORT}`);
 });
