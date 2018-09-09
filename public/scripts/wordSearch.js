@@ -1,5 +1,7 @@
 // Create a board object
 $(function () {
+    let size = 40;
+    let switched;
     $("#answers").attr("disabled", "disabled");
     $("#pdf").attr("disabled", "disabled");        
 
@@ -99,6 +101,7 @@ $(function () {
             }
         }
 
+        // fills empty places on the board with random letters
         this.fillBoard = function () {
             let alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p",
                 "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"
@@ -113,7 +116,7 @@ $(function () {
         }
     }
 
-
+    // makes and returns a new crossword
     function makeWordSearch(wordArr) {
         let userSize = $("#size").val();
         setSize(userSize);
@@ -124,10 +127,7 @@ $(function () {
         return (wSBoard);
     }
 
-    let size = 40;
-    let switched;
-
-
+    // On click, empties board area and calls import set function
     $("#importSet").click(function () {
         // get the set with the given ID
         $("#answers").removeAttr("disabled");
@@ -140,6 +140,7 @@ $(function () {
         importSet(url);
     });
 
+    // allows user to set a custom size within 15-40 square
     function setSize(userSize) {
         if (!userSize) {
             size = 40;
@@ -152,6 +153,7 @@ $(function () {
         }
     }
 
+    // imports the set from the quizlet api    
     function importSet(url) {
         let id = "GRfAXGKv6t"
         let setID = getSetID(url);
@@ -164,10 +166,12 @@ $(function () {
             })
     }
 
+    // strips the id out of the url
     function getSetID(url) {
         return /\d{6,}/g.exec(url)[0];
     }
 
+    // parses terms and definitions out of the quizlet object    
     function extractSetInfo(obj) {
         $("#title").text(obj.title);
         let terms = obj.terms;
@@ -181,6 +185,7 @@ $(function () {
         displayCrossword(wSBoard);
     }
 
+    // displays the crossword on the page    
     function displayCrossword(boardObj) {
         let board = boardObj.board;
         for (let y = 0; y < board.length; y++) {
@@ -219,6 +224,7 @@ $(function () {
         }
     }
 
+    // imports the words, but switches the clues and answers    
     $("#switch").click(function () {
         // get the set with the given ID
         $("#answers").removeAttr("disabled");
@@ -231,6 +237,7 @@ $(function () {
         importSet(url);
     });
 
+    // toggles the display of the answers     
     $("#answers").click(function () {
         $(".reveal").toggleClass("orange");
     })

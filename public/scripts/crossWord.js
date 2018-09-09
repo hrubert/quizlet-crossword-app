@@ -2,6 +2,7 @@
 let click = 0;
 
 $(function () {
+    let switched;    
     $("#answers").attr("disabled", "disabled");
     $("#pdf").attr("disabled", "disabled");
 
@@ -141,6 +142,7 @@ $(function () {
             return true;
         }
 
+        // removes edges if no letters are place within a row or column
         this.stripEdges = function () {
             //strip top
             loop1: for (let y = 0; y < this.board.length; y++) {
@@ -183,11 +185,10 @@ $(function () {
                 this.board[y].splice(rightMargin + 1, this.board[y].length);
                 this.board[y].splice(0, leftMargin);
             }
-
-
         }
     }
 
+    // Constructor fucntion for letter class
     function Letter(letter, horizontal, clue, num = false) {
         this.letter = letter;
         this.horizontal = horizontal;
@@ -195,7 +196,7 @@ $(function () {
         this.num = num;
     }
 
-
+    // Makes and returns a new crossword
     function makeWordSearch(wordArr) {
         let wSBoard = new Board(120);
         wSBoard.makeEmptyBoard();
@@ -203,14 +204,11 @@ $(function () {
         return wSBoard
     }
 
-    let switched;
-
-
+    // On click, empties board area and calls import set function
     $("#importSet").click(function () {
         click = 0;
         $("#answers").removeAttr("disabled");
         $("#pdf").removeAttr("disabled");                        
-        // get the set with the given ID
         switched = false;
         $("#display-crossword").empty();
         $("#clue-list").empty();
@@ -221,6 +219,7 @@ $(function () {
         importSet(url);
     });
 
+    // imports the set from the quizlet api
     function importSet(url) {
         let id = "GRfAXGKv6t"
         let setID = getSetID(url);
@@ -233,10 +232,12 @@ $(function () {
             })
     }
 
+    // strips the id out of the url
     function getSetID(url) {
         return /\d{6,}/g.exec(url)[0];
     }
 
+    // parses terms and definitions out of the quizlet object
     function extractSetInfo(obj) {
         $("#title").text(obj.title);
         let terms = obj.terms;
@@ -253,6 +254,7 @@ $(function () {
         displayCrossword(wSBoard);
     }
 
+    // displays the crossword on the page
     function displayCrossword(boardObj) {
         let board = boardObj.board;
         for (let i = 0; i < board.length; i++) {
@@ -289,12 +291,12 @@ $(function () {
         for (let i = 0; i < boardObj.acrossClues.length; i++) {
             $("#clue-list-across").append(`<li class="col-md-2">${boardObj.acrossClues[i][0]}. ${boardObj.acrossClues[i][1]} </li>`);
         }
-
         $("#heading").append("<p>Name:</p>");
         $("#heading").append("<p>Date:</p>");
         $("#heading").append("<p>Class:</p>");
     }
 
+    // imports the words, but switches the clues and answers
     $("#switch").click(function () {
         // get the set with the given ID
         click = 0;
@@ -310,6 +312,7 @@ $(function () {
         importSet(url);
     });
 
+    // toggles the display of the answers 
     $("#answers").click(function () {
         $("span").toggle()
         $(".letters").toggle();
