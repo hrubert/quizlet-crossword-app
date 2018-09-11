@@ -223,7 +223,7 @@ $(function () {
     function importSet(url) {
         let id = "GRfAXGKv6t"
         let setID = getSetID(url);
-        $.get("https://api.quizlet.com/2.0/sets/" + setID + "?client_id=" + id)
+        $.get("https://cors-anywhere.herokuapp.com/https://api.quizlet.com/2.0/sets/" + setID + "?client_id=" + id)
             .done(function (response) {
                 extractSetInfo(response);
             })
