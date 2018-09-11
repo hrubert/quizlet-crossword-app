@@ -1,5 +1,5 @@
 const express = require('express')
-// var cors = require('cors')
+var cors = require('cors')
 const app = express()
 const path = require('path')
 // const fetch = regitquire('node-fetch')
@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 3000
 //     next();
 // });
 
-// app.use(cors())
+app.use(cors())
 
 app.use(express.static('public'));
 
